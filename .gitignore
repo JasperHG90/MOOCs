@@ -1,0 +1,11 @@
+# R files
+*.Rdata
+*.Rhistory
+
+# Visuals
+*.pdf
+*.png
+*.jpg
+
+# Python
+
