@@ -2,6 +2,12 @@
 *.Rdata
 *.Rhistory
 
+# General data files
+*.csv
+*.txt
+*.sqlite
+*.db
+
 # Visuals
 *.pdf
 *.png
