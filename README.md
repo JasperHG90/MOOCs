@@ -17,12 +17,14 @@ This repository contains semi-cleaned scripts and documentation which you can us
 
 The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. After all, sharing is caring :-).
 
+The scripts are organized along the lines of the data dumps provided by Coursera. That is to say that each folder corresponds to a specific dataset, and each script within those folders pertains especially to those data. "General" helper functions are provided in the 'general_and_workflow'-folder. For a more specific overview of the folders, please see the section 'Folder structure' below.
 
+### Contact
+
+If you have questions, comments, or other requests, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
 
 ## Folder structure
 
 ## Feedback and Collaboration
-
-
 
 General Pre-Processing and Helper Functions for use with the Coursera data exports
