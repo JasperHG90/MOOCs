@@ -19,11 +19,9 @@ For general documentation on mongodb, see: http://docs.mongodb.org/manual/core/c
 
 You first want to set up mongodb. I do this on my Linux Virtualbox, but a quick google for 'install mongodb [insert operating system here]' should give you adequate information. Here are the links to the official install how-to for each OS:
 
-For linux, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
-
-For Mac, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
-
-For Windows, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/
+	- For linux, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+	- For Mac, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
+	- For Windows, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/
 
 ## Importing Coursera clickstream data (JSON format) in mongo
 
