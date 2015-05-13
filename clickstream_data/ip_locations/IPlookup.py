@@ -5,6 +5,7 @@
 
 '''
 This script looks up the IP address information for MOOC users
+
 Written by : Jasper Ginn
 Date : 23-03-2015
 Last modified : 24-03-2015

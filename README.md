@@ -25,6 +25,16 @@ If you have questions, comments, or other requests, please contact me at: j.h.gi
 
 ## Folder structure
 
-## Feedback and Collaboration
+				/clickstream_data
 
-General Pre-Processing and Helper Functions for use with the Coursera data exports
+				/documentation/
+
+				/forum_data
+
+				/general_data
+
+				/vagrant_box_MOOCs
+
+				/workflow
+
+## Feedback and Collaboration
