@@ -1,4 +1,5 @@
- # Working with the Coursera clickstream data
+# Working with the Coursera clickstream data
+
 
 ---------
 
