@@ -1,0 +1,104 @@
+---
+title: "Coursera Clickstream Data"
+author: "Jasper Ginn"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Introduction
+
+This document introduces some convenience functions to query clickstream data from a mongodb instance.  
+
+- Written by: Jasper Ginn
+- Affiliation: Online Learning Lab, Leiden Centre for Innovation, Leiden University
+- Date: 13-05-2015
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Set global knitr Options
+require(knitr)
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
+```
+
+### Preparations
+
+---------
+
+```{r}
+# Clean wd
+rm(list=ls())
+
+# Packages
+packages <- c("rmongodb", "jsonlite", "data.table", "dplyr", "stargazer")
+for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
+
+# Load helper functions
+source("/home/vagrant/helper_functions_clickstream.R")
+```
+
+### Source data 
+
+---------
+
+I've written a couple of convenience functions to quickly get the tables / collections stored in a mongodb instance. This way, it's easy to loop over a list of table/collection names and query data. 
+
+Below, you'll find the sample code to quickly query table names
+
+```{r}
+# Check tables in mongodb
+tables <- mongoMeta(return.type = "tables")
+```
+
+Similarly, you can query names of collections within a table
+
+```{r}
+# Check collections in table
+collections <- mongoMeta(return.type = "collections", table = tables[1])
+```
+
+One benefit of working with mongo is that there are several operations that can be performed without loading the data in memory. For example, if you want to query data about user interactions with videos for a course, you can query all unique URLs, format them nicely in R, and loop over them to get the data you want.
+
+Below, you will see one way of doing this
+
+```{r, echo=TRUE, results='hide'}
+# Query unique URLs
+mongo <- mongo.create()
+if(mongo.is.connected(mongo) == TRUE) {
+  urls <- as.character(mongo.distinct(mongo, collections[1], "page_url", query = list('key' = "user.video.lecture.action")))
+}
+# Disconnect
+mongo.destroy(mongo)
+# Check
+urls
+```
+
+Every video has multiple urls. So, when a user selects either the flash or html5 player it creates a different URL, e.g.
+
+```{r}
+stargazer(as.data.frame(urls[which(grepl("lecture_id=35", urls))]), summary=F, type="html")
+```
+
+So we select each of these URLs and query the data for them. Since we are interested in the *user actions* with the video, we can construct a single call that will return these actions in one go. (**NOTE: There are probably more efficient ways of doing this, but it gets the job done**). 
+
+```{r}
+# Select urls of interest
+urls_of_interest <- urls[which(grepl("lecture_id=35", urls))]
+# Time the action
+time.now <- Sys.time()
+# For each url, return a data frame with user actions
+res <- lapply(urls_of_interest, function(x){
+  return(QueryuserActions(collections[1], x, return.type="data.frame", include.username=TRUE))
+})
+# Runtime
+Sys.time() - time.now
+# Bind results into 1 dataframe
+res <- rbindlist(res)
+```
+
+The *currentTime* and *prevTime* variables are given in a sort of 'epoch time' format. You can convert them to video time with the function below. Please note that this function is not entirely accurate due to rounding errors.
+
+```{r}
+# Convert currentTime & PrevTime
+res$currentTime.conv <- sapply(res$currentTime, vidTime)
+res$prevTime.conv <- sapply(res$prevTime, vidTime)
+```
+

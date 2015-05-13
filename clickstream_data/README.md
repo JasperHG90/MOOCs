@@ -36,7 +36,7 @@ e.g.:
 
 Using terminal:
 
-	1. Start mongo : mongo
+	1. Enter mongo : mongo
 	2. Show databases : show dbs
 	3. Enter database : use [database name]
 	4. Show number of items in a database collection : db.[collection name].count()
@@ -65,7 +65,7 @@ Using terminal:
 
 You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the '/clickstream_data/Rmongodb' folder.
 
-### Useful resources for rmongodb
+#### Useful resources for rmongodb
 
 	1. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_introduction.html
 	2. https://rud.is/b/2012/10/22/get-an-r-data-frame-from-a-mongodb-query/
@@ -76,6 +76,6 @@ You can query mongodb results from within R using the rmongodb package. You can 
 
 You can query mongodb results from within Python using the pymongo module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
 
-### Useful resources for pymongo
+#### Useful resources for pymongo
 
 
