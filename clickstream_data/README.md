@@ -1,6 +1,5 @@
 # Working with the Coursera clickstream data
 
-
 ---------
 
 ## Introduction
@@ -62,13 +61,21 @@ Using terminal:
 
 			- mongo 127.0.0.1/mydb --eval "printjson(db.terror.count())"
 
-## Using mongo to query data in R
+## Using rmongodb to query data in R
 
-You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the /clickstream_data/Rmongodb folder.
+You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the '/clickstream_data/Rmongodb' folder.
 
-## Useful resources
+### Useful resources for rmongodb
 
-				1. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_introduction.html
-				2. https://rud.is/b/2012/10/22/get-an-r-data-frame-from-a-mongodb-query/
-				3. http://www.joyofdata.de/blog/mongodb-state-of-the-r-rmongodb/
-				4. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_cheat_sheet.pdf
+	1. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_introduction.html
+	2. https://rud.is/b/2012/10/22/get-an-r-data-frame-from-a-mongodb-query/
+	3. http://www.joyofdata.de/blog/mongodb-state-of-the-r-rmongodb/
+	4. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_cheat_sheet.pdf
+
+## Using Pymongo to query data in python
+
+You can query mongodb results from within Python using the pymongo module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
+
+### Useful resources for pymongo
+
+
