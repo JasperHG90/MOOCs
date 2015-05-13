@@ -4,10 +4,10 @@
 
 ## Meta
 
-Written by: Jasper Ginn
-Email: j.h.ginn[at]cdh.leidenuniv.nl
-Institution: Online Learning Lab, Leiden Centre for Innovation, Leiden University
-Date: 23-04-2015
+- Written by: Jasper Ginn
+- Email: j.h.ginn[at]cdh.leidenuniv.nl
+- Institution: Online Learning Lab, Leiden Centre for Innovation, Leiden University
+- Date: 23-04-2015
 
 ## Introduction
 
