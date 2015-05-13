@@ -17,7 +17,7 @@ For general documentation on mongodb, see: http://docs.mongodb.org/manual/core/c
 
 ## Setting up mongodb
 
-You first want to set up mongodb. I do this on my Linux Virtualbox, but a quick google for 'install mongodb [insert operating system here]' should give you adequate information. Here are the links to the official install how-to for each OS:
+Installing mongo can be a bit tricky depending on your OS. I do this on my Linux Virtualbox, but a quick google for 'install mongodb [insert operating system here]' should give you adequate information. Here are the links to the official install how-to for each OS:
 
 	- For linux, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 	- For Mac, see: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
@@ -27,11 +27,11 @@ You first want to set up mongodb. I do this on my Linux Virtualbox, but a quick 
 
 Using terminal:
 
-				- mongoimport -d [name database] -c [name collection] --type json --file [/path/to/filename].[extension]
+	- mongoimport -d [name database] -c [name collection] --type json --file [/path/to/filename].[extension]
 
 e.g.:
 
-				- mongoimport -d moocs -c metals001 --type json --file /users/jasper/desktop/metalsclickstream.txt
+	- mongoimport -d moocs -c metals001 --type json --file /users/jasper/desktop/metalsclickstream.txt
 
 ## Basic mongodb commands
 
