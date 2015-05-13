@@ -22,7 +22,7 @@ vagrant suspend
 	- VM is temporarily suspended. Machine state is written to hard drive.
 
 vagrant halt
-	- VM is shut down.
+	- Shuts down VM.
 
 vagrant destroy
 	- Destroys VM
