@@ -37,30 +37,30 @@ e.g.:
 
 Using terminal:
 
-				1. Start mongo : mongo
-				2. Show databases : show dbs
-				3. Enter database : use [database name]
-				4. Show number of items in a database collection : db.[collection name].count()
-				5. Iteratively show results in a database collection : db.[collection name].find()
-				6. Find a specific value in a collection : db.[collection name].find({ [item] : [value to look for]})
+	1. Start mongo : mongo
+	2. Show databases : show dbs
+	3. Enter database : use [database name]
+	4. Show number of items in a database collection : db.[collection name].count()
+	5. Iteratively show results in a database collection : db.[collection name].find()
+	6. Find a specific value in a collection : db.[collection name].find({ [item] : [value to look for]})
 
-					* Example:
+		* Example:
 
-						- db.metals.find( {'key':'user.video.lecture.action'})
+			- db.metals.find( {'key':'user.video.lecture.action'})
 
-					* For multiple queries, put commas between the desired fields, like so:
+		* For multiple queries, put commas between the desired fields, like so:
 
-						- db.[collection name].find({ [item1] : [value to look for] , [item2] : [value to look for] })
+			- db.[collection name].find({ [item1] : [value to look for] , [item2] : [value to look for] })
 
-				7. Saving MongoDB queries into a file : mongo 127.0.0.1/[database name] --eval "var c = db.[collection name].[statement](); while(c.hasNext()) {printjson(c.next())}" >> [file name].[extension]
+	7. Saving MongoDB queries into a file : mongo 127.0.0.1/[database name] --eval "var c = db.[collection name].[statement](); while(c.hasNext()) {printjson(c.next())}" >> [file name].[extension]
 
-					* Example: (mind the single quotation marks as the statement is wrapped in doubles)
+		* Example: (mind the single quotation marks as the statement is wrapped in doubles)
 
-						- mongo 127.0.0.1/mydb --eval "var c = db.terror.find(); while(c.hasNext()) {printjson(c.next())}" >> temp.txt
+			- mongo 127.0.0.1/mydb --eval "var c = db.terror.find(); while(c.hasNext()) {printjson(c.next())}" >> temp.txt
 
-						- mongo 127.0.0.1/mydb --eval "var c = db.terror.find({'key' : 'user.video.lecture.action', 'page_url' : 'https://class.coursera.org/terrorism-004/lecture/view?lecture_id=211'}); while(c.hasNext()) {printjson(c.next())}" >> test.txt
+			- mongo 127.0.0.1/mydb --eval "var c = db.terror.find({'key' : 'user.video.lecture.action', 'page_url' : 'https://class.coursera.org/terrorism-004/lecture/view?lecture_id=211'}); while(c.hasNext()) {printjson(c.next())}" >> test.txt
 
-						- mongo 127.0.0.1/mydb --eval "printjson(db.terror.count())"
+			- mongo 127.0.0.1/mydb --eval "printjson(db.terror.count())"
 
 ## Using mongo to query data in R
 
