@@ -59,7 +59,7 @@ One benefit of working with mongo is that there are several operations that can 
 
 Below, you will see one way of doing this
 
-```{r, echo=TRUE, results='hide'}
+```{r}
 # Query unique URLs
 mongo <- mongo.create()
 if(mongo.is.connected(mongo) == TRUE) {
