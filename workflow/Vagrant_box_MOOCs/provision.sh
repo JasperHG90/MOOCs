@@ -53,8 +53,15 @@ cd -
 mkdir Downloads
 mkdir temp
 
-echo "Installing Python dependencies..."
-sudo pip install -r /vagrant/Python_requirements.txt
+#echo "Installing Python dependencies..."
+#sudo pip install -r /vagrant/Python_requirements.txt
+
+echo "Installing Anaconda..."
+cd Downloads
+sudo wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
+sudo bash Anaconda-2.2.0-Linux-x86_64.sh <<-EOF
+ENTER
+EOF
 
 # Update
 sudo apt-get update <<-EOF
