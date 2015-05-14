@@ -8,7 +8,7 @@
 *.sqlite
 *.db
 # Specific data files
-/Vagrant_box_MOOCs/terrorcs
+/workflow/Vagrant_box_MOOCs/terrorcs
 
 # Visuals
 *.pdf

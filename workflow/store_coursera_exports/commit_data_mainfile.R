@@ -30,14 +30,6 @@ course.names <- c("configuringworld-001",
                   "terrorism-002",
                   "terrorism-003")
 
-# TESTING ----
-
-# Only take the first two courses (griffiths 1 + 2)
-'
-rawData <- rawData[1:2]
-' 
-# Test went well!
-
 # Commit the contents of each folder to its own db ------
 
 # For each folder, do . . .
