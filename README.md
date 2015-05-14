@@ -17,7 +17,7 @@ This repository contains semi-cleaned scripts and documentation which you can us
 
 I mostly work from within vagrant virtual boxes. This is convenient for the following reasons:
 
-1. Vagrant virtual boxes are quickly deployed, populated with software and, if needed, re-deployed
+1. Vagrant virtual boxes are quickly deployed. Additionally, they are quickly populated with software. If needed, they are quickly re-deployed
 2. They allow for a reproducable approach. 
 3. It's easy to install experimental software, and doing so will not affect your primary OS.
 4. They allow for a trial-and-error approaches.
