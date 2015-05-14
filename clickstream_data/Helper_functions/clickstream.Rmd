@@ -13,7 +13,7 @@ This document introduces some convenience functions to query clickstream data fr
 - Affiliation: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 13-05-2015
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
 # Set global knitr Options
 require(knitr)
 opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
