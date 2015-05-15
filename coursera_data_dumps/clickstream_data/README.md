@@ -63,7 +63,7 @@ Using terminal:
 
 ## Using rmongodb to query data in R
 
-You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the '/clickstream_data/Rmongodb' folder.
+You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the '/clickstream_data/Rmongodb' folder. I've also added an R markdown file on more complicated procedures in the '/clickstream_data/helper_functions' folder
 
 #### Useful resources for rmongodb
 
@@ -77,5 +77,9 @@ You can query mongodb results from within R using the rmongodb package. You can 
 You can query mongodb results from within Python using the pymongo module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
 
 #### Useful resources for pymongo
+
+	1. https://api.mongodb.org/python/current/tutorial.html
+	2. http://www.informit.com/articles/article.aspx?p=2246943
+	3. http://altons.github.io/python/2013/01/21/gentle-introduction-to-mongodb-using-pymongo/
 
 
