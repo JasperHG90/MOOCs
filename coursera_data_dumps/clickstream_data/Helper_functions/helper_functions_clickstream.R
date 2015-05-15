@@ -14,7 +14,7 @@ FUNCTION 1: Queries a mongodb instance and either returns tables within the data
       Table name for which you want to query the collections. Only necessary if you want to query collections in a table. 
 "
 
-mongoMeta <- function(return.type = c("tables", "collections"), table = NULL) {
+mongoMeta <- function(return.type = c("tables", "collections"), table = NULL, ...) {
   # match arguments
   return.type <- match.arg(return.type)
   # Check if statement is illegal
@@ -23,7 +23,7 @@ mongoMeta <- function(return.type = c("tables", "collections"), table = NULL) {
     return(NULL)
   }
   # Create mongo connection to localhost
-  mongo <- mongo.create()
+  mongo <- mongo.create(...)
   # Query
   if(return.type == "tables") {
     # Get databases
@@ -69,7 +69,7 @@ FUNCTION 2: For a given video URL, return the user actions
       specify whether you want the user session IDs to be included for each action. Defaults to FALSE
 "
 
-QueryuserActions <- function(collection, url, return.type = c("list", "data.frame"), include.username = c(FALSE,TRUE)) {
+QueryuserActions <- function(collection, url, return.type = c("list", "data.frame"), include.username = c(FALSE,TRUE), ...) {
   # Match arguments
   return.type <- match.arg(return.type)
   # Check if statement is illegal
@@ -78,7 +78,7 @@ QueryuserActions <- function(collection, url, return.type = c("list", "data.fram
     return(NULL)
   }
   # Create mongo connection to localhost
-  mongo <- mongo.create()
+  mongo <- mongo.create(...)
   # Create cursor
   if(mongo.is.connected(mongo) == TRUE) {
     # Create a cursor for the query
@@ -135,51 +135,26 @@ QueryuserActions <- function(collection, url, return.type = c("list", "data.fram
 }
 
 "
-FUNCTION 3: Function to convert the time at which actions occur. NOTE: this is a temporary function, it isn't completely accurate due to the rounding of minutes & seconds. Returns a character in the format 'Hours:Minutes:Seconds'
+FUNCTION 3: Function to convert the time at which actions occur. Returns a character in the format 'Hours:Minutes:Seconds'
   Parameters:
-    ob (numeric)
+    number.seconds (numeric)
       Number of seconds given by either the 'currentTime' or the 'prevTime' variable
 "
 
 # Function to convert video time
-vidTime <- function(ob) {
-  # If the number is 0, then the result is zero as well
-  if(ob == 0) {
-    tm.f <- format(strptime("2015-03-26 00:00:00", format="%Y-%m-%d %H:%M:%S"), 
-                   "%H:%M:%S")
-    return(tm.f)
+vidTime <- function(number.seconds) {
+  # Calculate seconds
+  seconds <- round(number.seconds %% 60, digits=0)
+  # Calculate minutes
+  minutes <- ((number.seconds - (number.seconds %% 60)) / 60)
+  # If < 10, add extra 0 . . . 
+  if ( minutes < 10 ) {
+    minutes <- paste0("0",minutes)
+  } 
+  if ( seconds < 10 ) {
+    seconds <- paste0("0", seconds)
   }
-  # Ok, let's convert to seconds and minutes! divide by 60
-  min <- round(ob/60, digits = 0)
-  # Function to convert seconds
-  secondConvert <- function(number) {
-    # Convert to character
-    r <- as.character(round(number, digits=2))
-    # Split
-    rb <- strsplit(r, ".", fixed=TRUE)
-    # Take seconds
-    rb <- as.numeric(rb[[1]][2])
-    # Convert
-    rb <- (rb / 100) * 60
-    # Return
-    return(round(rb, digits=0))
-  }
-  # Convert second
-  sec <- secondConvert(ob)
-  # If NA, return NA
-  statement <- sec < 10
-  if(is.na(statement)){
-    return(NA)
-  }
-  # If length is 1, add a zero
-  if(sec < 10){
-    tm <- paste0(as.character(min),":0",as.character(sec))
-  } else{
-    tm <- paste0(as.character(min),":",as.character(sec))
-  }
-  # Create time object
-  tm.f <- format(strptime(paste0('2015-01-01 00:',tm), format="%Y-%m-%d %H:%M:%S"), 
-                 format="%H:%M:%S")
   # Return
-  return(tm.f)
+  time <- paste0("00:", minutes, ":", seconds)
+  return(time)
 }

@@ -13,7 +13,7 @@ This document introduces some convenience functions to query clickstream data fr
 - Affiliation: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 13-05-2015
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # Set global knitr Options
 require(knitr)
 opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
@@ -28,7 +28,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 rm(list=ls())
 
 # Packages
-packages <- c("rmongodb", "jsonlite", "data.table", "dplyr", "stargazer")
+packages <- c("rmongodb", "jsonlite", "data.table", "dplyr", "stargazer", "ggplot2", "scales")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 
 # Load helper functions
@@ -59,7 +59,7 @@ One benefit of working with mongo is that there are several operations that can 
 
 Below, you will see one way of doing this
 
-```{r}
+```{r, echo=TRUE, results='hide'}
 # Query unique URLs
 mongo <- mongo.create()
 if(mongo.is.connected(mongo) == TRUE) {
@@ -94,11 +94,32 @@ Sys.time() - time.now
 res <- rbindlist(res)
 ```
 
-The *currentTime* and *prevTime* variables are given in a sort of 'epoch time' format. You can convert them to video time with the function below. Please note that this function is not entirely accurate due to rounding errors.
+For an overview of the variables, see the [Coursera help pages](https://partner.coursera.help/hc/en-us/articles/203586039-Manual-Data-Exports?flash_digest=141b196433d7edc8d30cb07c1c79a77a36bf7043)
+
+The *currentTime* and *prevTime* variables are given in a sort of 'epoch time' format. You can convert them to video time with the function below. 
 
 ```{r}
 # Convert currentTime & PrevTime
 res$currentTime.conv <- sapply(res$currentTime, vidTime)
-res$prevTime.conv <- sapply(res$prevTime, vidTime)
 ```
 
+By aggregating actions per time stamp, we can plot when which action occurred:
+
+```{r}
+# Aggregate by timestamp / action type
+agg <- res %>%
+  group_by(currentTime.conv, type) %>%
+  tally
+# Convert to datetime
+agg$datetime <- as.POSIXct(agg$currentTime.conv, format= "%H:%M:%S")
+# Plot
+ggplot(as.data.frame(agg), aes(x=datetime, y=n, group=type, colour=type)) +
+  geom_line(size=1.5, alpha=0.8) +
+  scale_x_datetime(breaks = "1 min",
+                   labels = date_format("%M:%S")) +
+  theme_bw()
+```
+
+You should see "spikes" of pauses & plays occurring at the beginning of the video and whenever questions are asked.
+
+![Clickstream_result](https://www.dropbox.com/s/xyfi17tipjnsbzc/clickstream1.png?dl=0)
