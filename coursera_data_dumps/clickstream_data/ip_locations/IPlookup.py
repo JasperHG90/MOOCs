@@ -1,12 +1,14 @@
 
 # coding: utf-8
 
-# In[93]:
+# In[4]:
 
 '''
-This script looks up the IP address information for MOOC users
+This script looks up the IP address information for MOOC users. NOTE: it does not yet distinguish between the use 
+of multiple IP addresses per user, although it would be relatively straightforward to do this.
 
 Written by : Jasper Ginn
+Affiliation : Online Learning Lab, Leiden Centre for Innovation, Leiden University
 Date : 23-03-2015
 Last modified : 24-03-2015
 Please send suggestions/comments to : Jasperginn@cdh.leidenuniv.nl
@@ -22,19 +24,21 @@ Import modules
 from ipwhois import IPWhois
 # Import SQLite
 import sqlite3 as lite
+# Import pymongo
+import pymongo
 
 
-# In[118]:
+# In[6]:
 
 '''
 +++ MAIN FUNCTION +++
 '''
 
-def mainFunction(dbname, dbpath, tablename_o, tablename_n, override = "TRUE"):
+def mainFunction(dbname, dbpath, tablename_n, mongo_collection, mongo_field, override = "TRUE", **kwargs):
     # Setup database
     dbSetup(dbname, tablename_n, path = dbpath, override = override)
     # Get IP addresses
-    q = getIPs(dbname, dbpath, tablename_o)
+    q = getUniqueVals(mongo_collection, mongo_field, **kwargs)
     # For each IP, get country code
     for IP in q:
         # Check if there is more than 1 IP address
@@ -72,7 +76,7 @@ def mainFunction(dbname, dbpath, tablename_o, tablename_n, override = "TRUE"):
                     print('There was an error . . . moving on')
 
 
-# In[111]:
+# In[2]:
 
 '''
 +++ HELPER FUNCTIONS +++
@@ -95,7 +99,7 @@ def pathMaker(dbname, path):
         return(path + '/' + dbname + '.db')
     
 '''
-FUNCTION 2 : Helper function that retrieves all the IP addresses from the database, stores them in a list. 
+FUNCTION 2 (DEPRECEATED) : Helper function that retrieves all the IP addresses from the database, stores them in a list. 
     parameters :
         db_name : string
             name of database
@@ -103,6 +107,8 @@ FUNCTION 2 : Helper function that retrieves all the IP addresses from the databa
             path to the database
         table_name : string
             table in which IP addresses are stored
+            
+** NOTE: this function is no longer being used.
 '''
 
 def getIPs(db_name, db_path, table_name):
@@ -225,9 +231,34 @@ def dbCheck(IP_add, dbname, dbtable, path = '~/desktop/'):
             return(data[0])
     # Close db connection
     con.close()
+    
+'''
+FUNCTION 10 : Helper function to retrieve all unique values of a collection in a mongodb instance
+    parameters :
+        collection : string
+            Collection to query from
+        field : string
+            Field for which you want unique values
+        **kwargs : 
+            Additional arguments for mongodb (i.e. host name, user name, password etc.)
+'''
+
+def getUniqueVals(collection, field, **kwargs):
+    # Connect to mongo
+    client = pymongo.MongoClient(**kwargs)
+    # Connect to MOOC db
+    mon_db = client["MOOCs"]
+    # Connect to collection
+    coll = mon_db[collection]
+    # Get distinct values for field
+    UV = coll.distinct(field)
+    # Disconnect
+    client.close()
+    # Return
+    return(UV)
 
 
-# In[119]:
+# In[ ]:
 
 '''
 +++ RUN +++
@@ -235,10 +266,13 @@ def dbCheck(IP_add, dbname, dbtable, path = '~/desktop/'):
 
 # Details
 dbname = "IP_clickstream_metals-001"
-dbpath = "/users/jasper/documents/github.projects/C4I/projects/clickstream_data/data"
-tablename_o = "IPadresses"
+dbpath = "/users/jasper/desktop"
 tablename_n = "IPandCC"
+mongo_collection = "terrorism004"
+mongo_field = "user_ip" 
+host = 'localhost' 
+port = 27017
 
 # Run
-mainFunction(dbname, dbpath, tablename_o, tablename_n, override = "FALSE")
+mainFunction(dbname, dbpath, tablename_n, mongo_collection, mongo_field, override = "TRUE", host=host, port=port)
 
