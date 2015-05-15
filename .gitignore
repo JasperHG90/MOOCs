@@ -16,6 +16,7 @@
 *.jpg
 
 # Python
+*.ipynb_checkpoints/
 
 # html
 *.html
