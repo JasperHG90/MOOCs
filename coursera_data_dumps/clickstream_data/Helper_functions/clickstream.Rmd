@@ -122,4 +122,4 @@ ggplot(as.data.frame(agg), aes(x=datetime, y=n, group=type, colour=type)) +
 
 You should see "spikes" of pauses & plays occurring at the beginning of the video and whenever questions are asked.
 
-![Clickstream_result](https://drive.google.com/file/d/0BwFSCwDYNUS9OTFIa1FfYmFTUHc/view?usp=sharing)
+![Clickstream_result](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/clickstream1.png)
