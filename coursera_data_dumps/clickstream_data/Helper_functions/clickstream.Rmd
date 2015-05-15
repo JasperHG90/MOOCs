@@ -122,4 +122,4 @@ ggplot(as.data.frame(agg), aes(x=datetime, y=n, group=type, colour=type)) +
 
 You should see "spikes" of pauses & plays occurring at the beginning of the video and whenever questions are asked.
 
-![Clickstream_result](http://blog.jimdo.com/wp-content/uploads/2014/01/tree-247122.jpg)
+![Clickstream_result](https://drive.google.com/file/d/0BwFSCwDYNUS9OTFIa1FfYmFTUHc/view?usp=sharing)
