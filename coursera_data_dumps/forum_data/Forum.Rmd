@@ -126,6 +126,56 @@ ggplot(for.comm.sum, aes(x=post_date, y=n)) +
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
 
+# Further processing the forum text
+
+We can further process the comments if so desired. This requires the 'tm' and 'SnowballC' packages for text processing:
+
+```{r}
+# Turn forum comments into corpus
+corp <- VCorpus(VectorSource(for.comm$cleaned_text))
+# Show summary
+summary(corp)
+# Essentially, we have a plain text document for each forum post.
+# Inspect
+inspect(corp)
+
+# Some more pre-processing : -----
+
+# Replace all capitalized letters with lower-case
+corp <- tm_map(corp, tolower)
+# Remove punctuation
+corp <- tm_map(corp, removePunctuation)
+# Strip redundant whitespace
+corp <- tm_map(corp, stripWhitespace)
+# Remove any numbers present
+corp <- tm_map(corp, removeNumbers)
+# Remove general stopwords
+corp <- tm_map(corp, removeWords, c(stopwords("english"), "one", "can", "also", "use"))
+```
+
+We can now apply some functions to stem the data. This can be a bit tricky.
+
+```{r}
+# Define a convenience function
+conv <- function(x) paste(stemDocument(unlist(strsplit(stripWhitespace(x), " "))), collapse = " ")
+# Map stemmer
+corp <- tm_map(corp, conv)
+# Remove other words
+t <- tm_map(corp, removeWords, c("will", 
+                              "like", 
+                              "new", 
+                              "used",
+                              "lot",
+                              "etc",
+                              "get",
+                              "put",
+                              "see",
+                              "week",
+                              "tell"))
+# Re-corpus
+t <- VCorpus(VectorSource(t))
+```
+
 
 
 
