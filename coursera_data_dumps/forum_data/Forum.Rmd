@@ -27,6 +27,14 @@ for(package in packages) if(!require(package, character.only=TRUE)) install.pack
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
 # Load forum helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/coursera_data_dumps/forum_data/forum_helper_functions.R")
+# Data locations
+data.dir <- "/users/jasper/desktop/TEMP"
+files <- paste0(dir_end(data.dir), list.files(data.dir))
+files
 ```
+
+
+
+
 
 
