@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 This folder contains helper functions for each Coursera data dump. This README also provides some basic information on MySQL databases, such as how to load data from a MySQL database, and how to convert a MySQL database to a SQLite database. 
 
@@ -16,13 +16,9 @@ I convert all of the Coursera MySQL dumps to SQLite databases. SQLite databases 
  2. I find it infinitely simpler to connect to a SQLite database from within R/Python. 
  3. It is easy to switch between R and Python without having to use CSVs, TXTs etc. 
 
-## Introduction
+# Working with the MySQL coursera data dumps
 
-This document lists commands and tips to work with mySQL servers. We work with MySQL because Coursera gives us MySQL data dumps, which we have to recreate in MySQL. So, for the forum && clickstream data, it is essential we do this. 
-
-I have installed MySQL in my own environment, where I can access these files. They are password protected. If you want to access the database, ask Jasper Ginn (j.h.ginn@cdh.leidenuniv.nl)
-
-## Details
+After installing MySQL on your environment, you should start by changing the password.
 
 - default username is 'root'. This comes with a pre-determined pwd. Here's how to change it (see: http://stackoverflow.com/questions/10895163/how-to-find-out-the-mysql-root-password)
 
@@ -50,33 +46,31 @@ I have installed MySQL in my own environment, where I can access these files. Th
 
 - export PATH=$PATH:/usr/local/mysql/bin/
 
-		* If problem exists that you have to export EVERY time you start a new terminal instance, see: http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac
+	* If problem exists that you have to export EVERY time you start a new terminal instance, see: http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac
 
-## Importing a db 
+### Importing a sql dump file
 
-Coursera gives us data in the form of MySQL dumps. Once you obtain these, install MySQL (and workbench), and follow the steps above. To import a sql file:
+Coursera gives us data in the form of MySQL dumps. Once you obtain these, follow the steps below to import a SQL file. 
 
-		1. mysql -u <USERNAME> -p
-		2. mysql> DROP DATABASE <dbname>;
-		3. mysql> CREATE DATABASE <dbname>;
-		4. mysql> EXIT;
-		5. mysql -u <USERNAME> -p -D my_session < /path/to/FILENAME.sql
+	1. Open a terminal instance 
+	2. Enter MySQL environment ----> mysql -u <USERNAME> -p
+	3. Drop database ----> DROP DATABASE <dbname>;
+	4. Create database ----> CREATE DATABASE <dbname>;
+	5. Exit MySQL environment ----> EXIT;
+
+Now, import a sql dumpfile into the mysql database with the following command. You will be prompted to enter your password after executing this line
+
+	6. mysql -u <USERNAME> -p -D my_session < /path/to/FILENAME.sql
 
 ## Exporting a MySQL database to SQLite database
 
 It is possible to convert MySQL databases to SQLite (see: https://gist.github.com/esperlu/943776)
 
-I convert MySQL databases to SQLite because:
+To convert, download the script and run the following line:
 
-		1) I use R, and the necessary package to view MySQL tables currently do not work on my laptop
-		2) I am more familiar with SQLite as of now
-		3) It is lightweight and easy to query.
+	- sh mysql2sqlite.sh --no-data -u root -p <MySQLtablename> | sqlite3 /path/to/folder/<dbname>.sqlite
 
-To convert, do:
-
-		- sh mysql2sqlite.sh --no-data -u root -p<pwd> <mysqldb> | sqlite3 /path/to/folder/<dbname>.sqlite
-
-However, for security concerns, we should move to quering MySQL directly out of R in the (near) future, as SQLite databases are NOT secure at all.
+You will be prompted to enter the mySQL password, after which the MySQL database will be converted to the location you specified.
 
 
 
