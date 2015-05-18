@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "tm", "SnowballC", "lubridate", "ggplot2", "scales")
+packages <- c("RSQLite", "dplyr", "tm", "SnowballC", "lubridate", "ggplot2", "scales", "data.table")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -196,9 +196,19 @@ While good enough for most applications, you can also use slightly more complica
 # Install koRpus
 ifelse(!require(koRpus), install.packages("koRpus"), require(koRpus))
 # Use treetagger - this is also a bit tricky. Get install instructions here: http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/#Linux. Also, do not forget to set the path in 'TT.options' to the treetagger installation files.
-tagRes <- treetag(corp[[1]], treetagger="manual", format="obj",
-                      TT.tknz=FALSE , lang="en",
-                      TT.options=list(path="/users/jasper/downloads/treeee", preset="en"))
+tagRes <- function(x) {
+  TT <- treetag(x, treetagger="manual", 
+          format="obj",
+          TT.tknz=FALSE , 
+          lang="en",
+          TT.options=list(path="/users/jasper/downloads/treeee", 
+                          preset="en"))
+  # Return data frame
+  as.data.frame(TT@TT.res)
+  }
+# Run
+res <- lapply(corp[1:10], tagRes)
+res <- rbindlist(res)
 # To data frame
 tagRes <- as.data.frame(tagRes@TT.res)
 # Print
