@@ -115,34 +115,20 @@ This approach does create an issue with character encoding. We want the text to 
 ```{r}
 # Convert to ASCII
 for.comm$cleaned_text <- iconv(for.comm$cleaned_text, "latin1", "ASCII", sub="")
-# Remove double and triple whitespaces
-for.comm$cleaned_text <- removeExcessWS(for.comm$cleaned_text)
-# Trim leading and trailing whitespace for every word. This we do by taking the entire message apart word by word and reconstructing it after having stripped the whitespace issues. This function also takes out punctuation.
+# Trim leading and trailing whitespace for every word. This we do by taking the entire message apart word by word and reconstructing it after having stripped the whitespace issues. This function also takes out punctuation, newlines & tabs.
 whiteSpaceFix <- function(x) {
   # Take sentence apart
   temp <- unlist(strsplit(x, " "))
   # Take out whitespaces
   temp <- temp[sapply(temp, function(b) b != "")]
-  # Reconstruct and take out punctuation
-  checkF <- function(z) grepl("[[:punct:]]", z)
-  checkF(temp)
+  # Reconstruct and take out punctuation + newlines etc.
+  checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
   temp <- temp[!checkF(temp) == TRUE]
   # Paste
   paste0(temp, collapse = " ") 
 }
-sss <- sapply(for.comm$cleaned_text, whiteSpaceFix)
 # Run
-for.comm$cleaned_text <- WhiteSpaceFix(for.comm$cleaned_text)
-
-ascii <- rawToChar(as.raw(0:127), multiple=T)
-paste(ascii[grepl('[[:punct:]]', ascii)], collapse="")
-
-for.comm$cleaned_text <- removeLeading(for.comm$cleaned_text)
-for.comm$cleaned_text <- removeTrailing(for.comm$cleaned_text)
-# Trim new lines
-for.comm$cleaned_text <- removeNewLine(for.comm$cleaned_text)
-# Trim tabs
-for.comm$cleaned_text <- removeTabs(for.comm$cleaned_text)
+for.comm$cleaned_text <- sapply(for.comm$cleaned_text, whiteSpaceFix)
 ```
 
 By now, the text should be cleaned of most issues. 
@@ -229,9 +215,8 @@ tagRes <- function(x) {
   }
 # Run
 res <- lapply(corp[1:10], tagRes)
+# To df
 res <- rbindlist(res)
-# To data frame
-tagRes <- as.data.frame(tagRes@TT.res)
 # Print
 knitr::kable(head(tagRes[,-c(7,8)]))
 ```
