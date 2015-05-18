@@ -156,12 +156,16 @@ corp <- tm_map(corp, removeWords, c(stopwords("english"), "one", "can", "also", 
 We can now apply some functions to stem the data. This can be a bit tricky.
 
 ```{r}
-# Define a convenience function
-conv <- function(x) paste(stemDocument(unlist(strsplit(stripWhitespace(x), " "))), collapse = " ")
-# Map stemmer
+# Remove all whitespace before and after each word.
+conv <- function(x) paste(unlist(strsplit(stripWhitespace(x), " ")), collapse = " ")
+# Apply
 corp <- tm_map(corp, conv)
+# Define a convenience function to stem each word using porter stemmer
+conv <- function(x) paste(stemDocument(unlist(strsplit(x, " "))), collapse = " ")
+# Map stemmer
+corp.t <- tm_map(corp, conv)
 # Remove other words
-t <- tm_map(corp, removeWords, c("will", 
+corp.t <- tm_map(corp, removeWords, c("will", 
                               "like", 
                               "new", 
                               "used",
@@ -173,7 +177,7 @@ t <- tm_map(corp, removeWords, c("will",
                               "week",
                               "tell"))
 # Re-corpus
-corp.t <- VCorpus(VectorSource(t))
+corp.t <- VCorpus(VectorSource(corp.t))
 ```
 
 We can now do some fun stuff like create a wordcloud:
@@ -191,12 +195,24 @@ While good enough for most applications, you can also use slightly more complica
 ```{r}
 # Install koRpus
 ifelse(!require(koRpus), install.packages("koRpus"), require(koRpus))
-# Use treetagger - this is also a bit tricky. You need to go 
-tagRes <- treetag(c("run", "ran", "running"), treetagger="manual", format="obj",
+# Use treetagger - this is also a bit tricky. Get install instructions here: http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/#Linux. Also, do not forget to set the path in 'TT.options' to the treetagger installation files.
+tagRes <- treetag(corp[[1]], treetagger="manual", format="obj",
                       TT.tknz=FALSE , lang="en",
                       TT.options=list(path="/users/jasper/downloads/treeee", preset="en"))
+# To data frame
 tagRes <- as.data.frame(tagRes@TT.res)
+# Print
+knitr::kable(head(tagRes[,-c(7,8)]))
 ```
+
+|token      |tag |lemma      | lttr|wclass    |desc                                  |
+|:----------|:---|:----------|----:|:---------|:-------------------------------------|
+|welcome    |JJ  |welcome    |    7|adjective |Adjective                             |
+|course     |NN  |course     |    6|noun      |Noun, singular or mass                |
+|leiden     |NN  |<unknown>  |    6|noun      |Noun, singular or mass                |
+|university |NN  |university |   10|noun      |Noun, singular or mass                |
+|think      |VVP |think      |    5|verb      |Verb, non-3rd person singular present |
+|important  |JJ  |important  |    9|adjective |Adjective                             |
 
 However, advanced NLP support is much more developed in Python. I will add a script soon for NLP in Python.
 
