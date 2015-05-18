@@ -45,3 +45,33 @@ removeCommonTerms <- function (x, pct)
     x[, termIndex]
   else x[termIndex, ]
 }
+
+'
+FUNCTION 6: Remove excess whitespace
+'
+
+removeExcessWS <- function(string) {
+  temp <- gsub("   ", " ", string)
+  temp <- gsub("  ", " ", temp)
+  return(temp)
+}
+
+'
+FUNCTION 7: Remove leading whitespace
+'
+removeLeading <- function (x)  sub("^\\s+", "", x)
+
+'
+FUNCTION 8: Remove trailing whitespace
+'
+removeTrailing <- function (x) sub("\\s+$", "", x)
+
+'
+FUNCTION 9: Remove new lines
+'
+removeNewLine <- function(x) gsub("[\r\n]", " ", x)
+
+'
+FUNCTION 10: Remove tabs
+'
+removeTabs <- function(x) gsub("[\t]", " ", x)
