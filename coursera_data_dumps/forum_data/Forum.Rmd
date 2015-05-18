@@ -1,0 +1,32 @@
+---
+title: "Working with the Coursera Forum Data"
+author: "Jasper Ginn"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Introduction
+
+This document outlines several ways to work with the Coursera forum data.
+
+```{r}
+# Set global knitr Options
+require(knitr)
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
+```
+
+# Preparations
+
+```{r}
+# Clean wd
+rm(list=ls())
+# Load packages
+packages <- c("RSQLite", "dplyr", "stargazer")
+for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
+# Load general helper functions
+source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
+# Load forum helper functions
+source("/Users/Jasper/Documents/Github.projects/MOOCs/coursera_data_dumps/forum_data/forum_helper_functions.R")
+```
+
+

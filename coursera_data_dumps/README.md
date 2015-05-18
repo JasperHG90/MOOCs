@@ -52,11 +52,12 @@ After installing MySQL on your environment, you should start by changing the pas
 
 Coursera gives us data in the form of MySQL dumps. Once you obtain these, follow the steps below to import a SQL file. 
 
-	1. Open a terminal instance 
-	2. Enter MySQL environment ----> mysql -u <USERNAME> -p
-	3. Drop database ----> DROP DATABASE <dbname>;
-	4. Create database ----> CREATE DATABASE <dbname>;
-	5. Exit MySQL environment ----> EXIT;
+	1. If MySQL is not running, start it using: sudo /usr/local/mysql/support-files/mysql.server start 
+	2. Open a terminal instance 
+	3. Enter MySQL environment ----> mysql -u <USERNAME> -p
+	4. Drop database ----> DROP DATABASE <dbname>;
+	5. Create database ----> CREATE DATABASE <dbname>;
+	6. Exit MySQL environment ----> EXIT;
 
 Now, import a sql dumpfile into the mysql database with the following command. You will be prompted to enter your password after executing this line
 
