@@ -32,7 +32,7 @@ data.dir <- "/users/jasper/desktop/TEMP"
 files <- paste0(dir_end(data.dir), list.files(data.dir))
 ```
 
-You can use the "dbQA" to get all table names residing in a SQLite database, e.g.:
+You can use the "dbQA" ("database Quick Access") function to get all table names residing in a SQLite database, e.g.:
 
 ```{r}
 # Get all table names
@@ -71,7 +71,21 @@ outVar <- c("user_id", "edit_time", "user_agent", "text_type")
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
 
-One of the problems with the forum data is that the text is essentially wrapped in html code. Plus, it doesn't behave quite nicely. 
+One of the problems with the forum data is that the text is essentially wrapped in html code. Plus, it doesn't behave quite nicely. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
+
+```{r}
+# Strip html
+for.comm$cleaned_text <- removehtml(for.comm$post_text)
+# Take out URLs
+for.comm$cleaned_text <- removeurl(for.comm$cleaned_text)
+```
+
+Another issue is the character encoding. Essentially, we want the text to be in ASCII format if we are to process it in R:
+
+```{r}
+# Convert to ASCII
+for.comm$cleaned_text <- iconv(for.comm$cleaned_text, "latin1", "ASCII", sub="")
+```
 
 
 
