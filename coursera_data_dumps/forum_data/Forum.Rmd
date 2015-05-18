@@ -32,13 +32,18 @@ data.dir <- "/users/jasper/desktop/TEMP"
 files <- paste0(dir_end(data.dir), list.files(data.dir))
 ```
 
-You can use the "dbQA" quick function to either query a table from the SQLite file, or you can use it to get all table names, e.g.:
+You can use the "dbQA" to get all table names residing in a SQLite database, e.g.:
 
 ```{r}
 # Get all table names
 tabs <- dbQA(files[1], show.table=TRUE)
 # Print
 print(tabs)
+```
+
+Similarly, you can use the dbQA quick function to query a table from the SQLite file, e.g.
+
+```{r}
 # We want all forum posts
 for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE)
 # Look at structure
