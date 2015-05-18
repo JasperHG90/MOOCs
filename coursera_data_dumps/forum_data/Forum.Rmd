@@ -71,34 +71,7 @@ outVar <- c("user_id", "edit_time", "user_agent", "text_type")
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
 
-# Preprocessing
-
-One of the problems with the forum data is that the text is essentially wrapped in html code. Plus, it doesn't behave quite nicely. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
-
-```{r}
-# Strip html
-for.comm$cleaned_text <- removehtml(for.comm$post_text)
-# Take out URLs
-for.comm$cleaned_text <- removeurl(for.comm$cleaned_text)
-```
-
-Another issue is the character encoding. Essentially, we want the text to be in ASCII format if we are to process it in R:
-
-```{r}
-# Convert to ASCII
-for.comm$cleaned_text <- iconv(for.comm$cleaned_text, "latin1", "ASCII", sub="")
-# Remove double and triple whitespaces
-for.comm$cleaned_text <- removeExcessWS(for.comm$cleaned_text)
-# Trim leading and trailing whitespace
-for.comm$cleaned_text <- removeLeading(for.comm$cleaned_text)
-for.comm$cleaned_text <- removeTrailing(for.comm$cleaned_text)
-# Trim new lines
-for.comm$cleaned_text <- removeNewLine(for.comm$cleaned_text)
-# Trim tabs
-for.comm$cleaned_text <- removeTabs(for.comm$cleaned_text)
-```
-
-By now, the text should be cleaned of most issues. We can convert and format the UNIX timestamps like so:
+We can convert and format the UNIX timestamps like so:
 
 ```{r}
 # Convert unix timestamp
@@ -125,6 +98,54 @@ ggplot(for.comm.sum, aes(x=post_date, y=n)) +
 ```
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
+
+# Preprocessing
+
+One of the problems with the forum data is that the text is wrapped in html code. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
+
+```{r}
+# Strip html
+for.comm$cleaned_text <- removehtml(for.comm$post_text)
+# Take out URLs
+for.comm$cleaned_text <- removeurl(for.comm$cleaned_text)
+```
+
+This approach does create an issue with character encoding. We want the text to be in ASCII format if we are to process it in R:
+
+```{r}
+# Convert to ASCII
+for.comm$cleaned_text <- iconv(for.comm$cleaned_text, "latin1", "ASCII", sub="")
+# Remove double and triple whitespaces
+for.comm$cleaned_text <- removeExcessWS(for.comm$cleaned_text)
+# Trim leading and trailing whitespace for every word. This we do by taking the entire message apart word by word and reconstructing it after having stripped the whitespace issues. This function also takes out punctuation.
+whiteSpaceFix <- function(x) {
+  # Take sentence apart
+  temp <- unlist(strsplit(x, " "))
+  # Take out whitespaces
+  temp <- temp[sapply(temp, function(b) b != "")]
+  # Reconstruct and take out punctuation
+  checkF <- function(z) grepl("[[:punct:]]", z)
+  checkF(temp)
+  temp <- temp[!checkF(temp) == TRUE]
+  # Paste
+  paste0(temp, collapse = " ") 
+}
+sss <- sapply(for.comm$cleaned_text, whiteSpaceFix)
+# Run
+for.comm$cleaned_text <- WhiteSpaceFix(for.comm$cleaned_text)
+
+ascii <- rawToChar(as.raw(0:127), multiple=T)
+paste(ascii[grepl('[[:punct:]]', ascii)], collapse="")
+
+for.comm$cleaned_text <- removeLeading(for.comm$cleaned_text)
+for.comm$cleaned_text <- removeTrailing(for.comm$cleaned_text)
+# Trim new lines
+for.comm$cleaned_text <- removeNewLine(for.comm$cleaned_text)
+# Trim tabs
+for.comm$cleaned_text <- removeTabs(for.comm$cleaned_text)
+```
+
+By now, the text should be cleaned of most issues. 
 
 # Further processing the forum text
 
