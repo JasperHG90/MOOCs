@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "stargazer")
+packages <- c("RSQLite", "dplyr", "tm", "SnowballC")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -71,6 +71,8 @@ outVar <- c("user_id", "edit_time", "user_agent", "text_type")
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
 
+# Preprocessing
+
 One of the problems with the forum data is that the text is essentially wrapped in html code. Plus, it doesn't behave quite nicely. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
 
 ```{r}
@@ -96,7 +98,18 @@ for.comm$cleaned_text <- removeNewLine(for.comm$cleaned_text)
 for.comm$cleaned_text <- removeTabs(for.comm$cleaned_text)
 ```
 
-By now, the text should be cleaned of most issues.
+By now, the text should be cleaned of most issues. We can convert and format the UNIX timestamps like so:
+
+```{r}
+# Convert unix timestamp
+for.comm$post_time <- convertunixtm(for.comm$post_time)
+# Format to only keep date
+for.comm$post_date <- strftime(for.comm$post_time, format="%Y-%m-%d")
+```
+
+
+
+
 
 
 
