@@ -28,17 +28,31 @@ FUNCTION 2: Quick access to a sqlite table.
         Directory (including name and extension of db) 
     - table (string)
         Name of table to be extracted
+    - show.table (logical)
+        Show tables in db?
 '
 
-dbQA <- function(db.name, table) {
+dbQA <- function(db.name, table = NULL, show.table = c(FALSE, TRUE)) {
+  # Check if query is legal
+  if(length(table) == 0 && show.table == FALSE){
+    print("Please specify a table name to query.")
+    return(NULL)
+  }
   # Connect
   db <- dbConnect(SQLite(), dbname = db.name)
-  # Select table
-  t <- dbReadTable(db, table)
-  # Disconnect db
-  dbDisconnect(db)
-  # Return
-  return(t)
+  # If table is true, return 
+  if(show.table == TRUE){
+    tabs <- dbListTables(db)
+    dbDisconnect(db)
+    return(tabs)
+  } else{
+      # Select table
+    t <- dbReadTable(db, table)
+    # Disconnect db
+    dbDisconnect(db)
+    # Return
+    return(t)
+  }
 }
 
 '

@@ -30,8 +30,26 @@ source("/Users/Jasper/Documents/Github.projects/MOOCs/coursera_data_dumps/forum_
 # Data locations
 data.dir <- "/users/jasper/desktop/TEMP"
 files <- paste0(dir_end(data.dir), list.files(data.dir))
-files
 ```
+
+You can use the "dbQA" quick function to either query a table from the SQLite file, or you can use it to get all table names, e.g.:
+
+```{r}
+# Get all table names
+tabs <- dbQA(files[1], show.table=TRUE)
+# Print
+print(tabs)
+# We want all forum posts
+for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE)
+# Look at structure
+str(for.comm)
+# Col names
+coln <- colnames(for.comm)
+outVar <- c("user_id", "edit_time", "user_agent", "text_type")
+# Take out variables listed above
+for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
+```
+
 
 
 
