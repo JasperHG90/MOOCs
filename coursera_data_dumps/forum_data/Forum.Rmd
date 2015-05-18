@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "tm", "SnowballC")
+packages <- c("RSQLite", "dplyr", "tm", "SnowballC", "lubridate", "ggplot2", "scales")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -107,7 +107,24 @@ for.comm$post_time <- convertunixtm(for.comm$post_time)
 for.comm$post_date <- strftime(for.comm$post_time, format="%Y-%m-%d")
 ```
 
+This way, we can get an idea of when people post comments:
 
+```{r}
+# Tally
+for.comm.sum <- for.comm %>%
+  group_by(post_date) %>%
+  tally() %>%
+  as.data.frame(.) 
+# Convert to date
+for.comm.sum$post_date <- as.Date(ymd(for.comm.sum$post_date))
+# Plot
+ggplot(for.comm.sum, aes(x=post_date, y=n)) +
+  geom_line() +
+  scale_x_date() +
+  theme_bw()
+```
+
+[!forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
 
 
 
