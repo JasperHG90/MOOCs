@@ -38,8 +38,24 @@ You can use the "dbQA" to get all table names residing in a SQLite database, e.g
 # Get all table names
 tabs <- dbQA(files[1], show.table=TRUE)
 # Print
-print(tabs)
+knitr::kable(data.frame(Table_name = tabs))
 ```
+
+|Table_name                  |
+|:---------------------------|
+|activity_log                |
+|forum_comments              |
+|forum_forums                |
+|forum_posts                 |
+|forum_reporting             |
+|forum_reputation_points     |
+|forum_reputation_record     |
+|forum_subscribe_forums      |
+|forum_subscribe_threads     |
+|forum_tags                  |
+|forum_tags_threads          |
+|forum_threads               |
+|kvs_course.forum_readrecord |
 
 Similarly, you can use the dbQA quick function to query a table from the SQLite file, e.g.
 
@@ -54,6 +70,10 @@ outVar <- c("user_id", "edit_time", "user_agent", "text_type")
 # Take out variables listed above
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
+
+One of the problems with the forum data is that the text is essentially wrapped in html code. Plus, it doesn't behave quite nicely. 
+
+
 
 
 
