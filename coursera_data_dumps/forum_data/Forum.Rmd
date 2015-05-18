@@ -124,7 +124,7 @@ ggplot(for.comm.sum, aes(x=post_date, y=n)) +
   theme_bw()
 ```
 
-[!forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
+[forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
 
 
 
