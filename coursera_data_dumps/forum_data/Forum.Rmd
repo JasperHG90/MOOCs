@@ -186,9 +186,19 @@ wordcloud(corp.t, scale=c(2.5,0.5), max.words=150, rot.per=0.35, use.r.layout=FA
 
 ![wordcloud](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/wordcloud.png)
 
+While good enough for most applications, you can also use slightly more complicated stemmers. The "koRpus" package allows for [lemmanization](http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html). It uses the [treetagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/#Linux) tool for this, which you should install prior to running the following line of code. 
 
+```{r}
+# Install koRpus
+ifelse(!require(koRpus), install.packages("koRpus"), require(koRpus))
+# Use treetagger - this is also a bit tricky. You need to go 
+tagRes <- treetag(c("run", "ran", "running"), treetagger="manual", format="obj",
+                      TT.tknz=FALSE , lang="en",
+                      TT.options=list(path="/users/jasper/downloads/treeee", preset="en"))
+tagRes <- as.data.frame(tagRes@TT.res)
+```
 
-
+However, advanced NLP support is much more developed in Python. I will add a script soon for NLP in Python.
 
 
 
