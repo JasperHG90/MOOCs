@@ -176,8 +176,15 @@ t <- tm_map(corp, removeWords, c("will",
 t <- VCorpus(VectorSource(t))
 ```
 
+We can now do some fun stuff like create a wordcloud:
 
+```{r}
+# Create wordcloud
+require(wordcloud)
+wordcloud(t, scale=c(2.5,0.5), max.words=150, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+```
 
+![wordcloud](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/wordcloud.png)
 
 
 
