@@ -1,6 +1,6 @@
 # Introduction
 
-This [vagrantbox](http://docs.vagrantup.com/v2/boxes.html) sets up a [virtual environment](http://en.wikipedia.org/wiki/Virtual_environment_software) to work with [Coursera](https://www.coursera.org/) MOOC data. It installs all of the prerequisites to run the sample scripts provided by Leiden University on [Github](https://github.com/JasperHG90/MOOCs). Both [python](https://www.python.org/) and [Rstudio](http://www.rstudio.com/products/rstudio/) can be run from within a browser outside of the virtual environment.[MongoDB](https://www.mongodb.org/) and [MySQL](https://www.mysql.com/) may also be accessed from outside the virtual environment
+This [vagrantbox](http://docs.vagrantup.com/v2/boxes.html) sets up a [virtual environment](http://en.wikipedia.org/wiki/Virtual_environment_software) to work with [Coursera](https://www.coursera.org/) MOOC data. It installs all of the prerequisites to run the sample scripts provided by Leiden University on [Github](https://github.com/JasperHG90/MOOCs). Both [python](https://www.python.org/) and [Rstudio](http://www.rstudio.com/products/rstudio/) can be run from within a browser outside of the virtual environment. [MongoDB](https://www.mongodb.org/) and [MySQL](https://www.mysql.com/) may also be accessed from outside the virtual environment
 
 ## Documentation
 
@@ -16,27 +16,25 @@ More information:
 
 Vagrant boxes create and populate a virtual machine on your computer that is an exact clone of the person who made it. The vagrant configuration is stored in the 'Vagrantfile'. The 'shell.sh' script installs programs / packages etc. that are needed for analyses, such as R, R-studio & Python. The 'Python_requirements.txt' file contains a list of python packages to be installed. The 'R_requirements.txt' file contains a list of R packages to be installed. This file is loaded by the 'InstallRpackages.R' file to install the packages. The 'crontab.txt' file contains recursive commands that occur every 'x' seconds, minutes, hours or days.  
 
-# Setting up the vagrantbox
+# Setting up the vagrantbox (on UNIX machines)
 
-After installing vagrant & [virtualBox](https://www.virtualbox.org/), download or clone the [MOOC vagrant box](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs)
-
-Navigate to the folder where you downloaded the box via terminal and run 'vagrant up' to start up the machine.
+After installing vagrant & [virtualBox](https://www.virtualbox.org/), download or clone the [MOOC vagrant box](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs). Via terminal, navigate to the folder where you downloaded the box and run 'vagrant up' to start up the machine. The vagrant box will now start to configure. 
 
 ### BASIC COMMANDS
 
-vagrant up 
+- vagrant up 
 	- Sets up the Virtual Machine (VM)
 
-vagrant ssh
+- vagrant ssh
 	- Boots into the VM (need to vagrant up first)
 
-vagrant suspend
+- vagrant suspend
 	- VM is temporarily suspended. Machine state is written to hard drive.
 
-vagrant halt
+- vagrant halt
 	- Shuts down VM.
 
-vagrant destroy
+- vagrant destroy
 	- Destroys VM
 
 ## Starting and accessing Ipython Notebook & Rstudio server from outside the VM
