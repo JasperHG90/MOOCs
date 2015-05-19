@@ -7,8 +7,6 @@
 *.txt
 *.sqlite
 *.db
-# Specific data files
-/workflow/Vagrant_box_MOOCs/terrorcs
 
 # Visuals
 *.pdf
@@ -20,6 +18,7 @@
 
 # html
 *.html
+*.htm
 
 # VM
-*/.vagrant/
+*.vagrant/
