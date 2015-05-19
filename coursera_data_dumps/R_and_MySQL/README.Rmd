@@ -7,7 +7,7 @@ output: html_document
 
 # Introduction
 
-This document briefly outlines how you can use R to access MySQL databases.
+This document briefly outlines how you can use R to access [MySQL databases](https://www.mysql.com/).
 
 ```{r}
 # Set global knitr Options
@@ -21,7 +21,7 @@ Firstly, make sure that MySQL is running by opening up a terminal and executing 
 
  - sudo /usr/local/mysql/support-files/mysql.server start
 
-In R, you need to install the "RMySQL" package, which you can do as follows
+In R, you need to install the [RMySQL](http://cran.r-project.org/web/packages/RMySQL/index.html) package, which you can do as follows
 
 ```{r}
 # Install packages
