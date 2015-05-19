@@ -4,10 +4,10 @@
 
 ## Introduction
 
-For several reasons, it makes sense to store the clickstream data in a mongoDB instance. Advantages include:
+For several reasons, it makes sense to store the clickstream data in a [mongoDB](https://www.mongodb.org/) instance. Advantages include:
 
 1. Mongo is fast
-2. The Coursera exports are essentially BSON exports from a MongoDB. Importing them is therefore pretty painless. 
+2. The Coursera exports are essentially [BSON](http://bsonspec.org/) exports from a MongoDB. Importing them is therefore pretty painless. 
 3. Mongo can be queried from within R and Python.
 4. A lot of the 'pre work' such as getting unique URLs, counts and other simple operations can be done from within mongo. As such, you avoid having to load the data in memory in its entirety or that you have to read the files line-by-line.
 5. For those interested; mongo has a map/reduce function.
@@ -16,13 +16,13 @@ For general documentation on mongodb, see: http://docs.mongodb.org/manual/core/c
 
 ## Setting up mongodb
 
-Installing mongo can be a bit tricky depending on your OS. I do this on my Linux Virtualbox, but a quick google for 'install mongodb [insert operating system here]' should give you adequate information. Here are the links to the official install how-to for each OS:
+Installing mongo can be a bit tricky depending on your OS. I do this on [my Linux Virtualbox](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs), but a quick google for 'install mongodb [insert operating system here]' should give you adequate information. Here are the links to the official install how-to for each OS:
 
-	- [For linux](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
-	- [For Mac](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
-	- [For Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/)
+- [For linux](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
+- [For Mac](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
+- [For Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/)
 
-## Importing Coursera clickstream data (JSON format) in mongo
+## Importing Coursera clickstream data ([JSON](http://json.org/) format) in mongo
 
 Using terminal:
 
@@ -61,7 +61,7 @@ Using terminal:
 
 			- mongo 127.0.0.1/mydb --eval "printjson(db.terror.count())"
 
-## Using rmongodb to query data in R
+## Using [rmongodb](http://cran.r-project.org/web/packages/rmongodb/index.html) to query data in R
 
 You can query mongodb results from within R using the rmongodb package. You can find a 'basic script' on how to query data in the '/clickstream_data/Rmongodb' folder. I've also added an R markdown file on more complicated procedures in the '/clickstream_data/helper_functions' folder
 
@@ -74,7 +74,7 @@ You can query mongodb results from within R using the rmongodb package. You can 
 
 ## Using Pymongo to query data in python
 
-You can query mongodb results from within Python using the pymongo module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
+You can query mongodb results from within Python using the [pymongo](http://api.mongodb.org/python/current/) module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
 
 #### Useful resources for pymongo
 
