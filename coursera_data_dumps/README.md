@@ -4,9 +4,9 @@ This folder contains helper functions for each Coursera data dump. This README a
 
 More Information:
 
- 1. Coursera help pages: https://partner.coursera.help/hc/en-us/articles/203586039-Manual-Data-Exports
- 2. Installing MySQL & MySQL workbench: https://dev.mysql.com/downloads/mysql/
- 3. MySQL v. SQLite: https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems
+ 1. [Coursera help pages](https://partner.coursera.help/hc/en-us/articles/203586039-Manual-Data-Exports)
+ 2. [Installing MySQL & MySQL workbench](https://dev.mysql.com/downloads/mysql/)
+ 3. [MySQL v. SQLite](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems)
 
 ### A note on my use of SQLite databases
 
@@ -67,7 +67,7 @@ Now, import a sql dumpfile into the mysql database with the following command. Y
 
 It is possible to convert MySQL databases to SQLite (see: https://gist.github.com/esperlu/943776)
 
-To convert, download the script and run the following line:
+To convert, download the script. Then, navigate to the folder where the script is located and run the following line:
 
 	- sh mysql2sqlite.sh --no-data -u root -p <MySQLtablename> | sqlite3 /path/to/folder/<dbname>.sqlite
 
