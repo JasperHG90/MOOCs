@@ -1,10 +1,9 @@
-# R files
+\# R files
 *.Rdata
 *.Rhistory
 
 # General data files
 *.csv
-*.txt
 *.sqlite
 *.db
 
