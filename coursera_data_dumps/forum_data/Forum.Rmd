@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "ggplot2", "scales")
+packages <- c("RSQLite", "dplyr", "ggplot2", "scales", "reshape2")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -60,7 +60,7 @@ knitr::kable(data.frame(Table_name = tabs))
 Similarly, you can use the dbQA quick function to query a table from the SQLite file, e.g.
 
 ```{r}
-# We want all forum posts
+# We want all forum comments
 for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE)
 # Look at structure
 str(for.comm)
@@ -80,21 +80,45 @@ for.comm$post_time <- convertunixtm(for.comm$post_time)
 for.comm$post_date <- strftime(for.comm$post_time, format="%Y-%m-%d")
 ```
 
-This way, we can get an idea of when people post comments:
+This way, we can get an idea of when people post comments and threads:
 
 ```{r}
+# Get threads
+for.post <- dbQA(files[1], table = tabs[12], show.table=FALSE)
+# Convert unix timestamp
+for.post$posted_time <- convertunixtm(for.post$posted_time)
+# Format to only keep date
+for.post$post_date <- strftime(for.post$posted_time, format="%Y-%m-%d")
 # Tally
-for.comm.sum <- for.comm %>%
-  group_by(post_date) %>%
-  tally() %>%
-  as.data.frame(.) 
+for.comm.sum <- merge(for.comm %>%
+                        group_by(post_date) %>%
+                        tally() %>%
+                        as.data.frame(.),
+                      for.post %>%
+                        group_by(post_date) %>%
+                        tally() %>%
+                        as.data.frame(.),
+                      by = "post_date", all=TRUE)
+# Rename
+colnames(for.comm.sum) <- c("Post_Date", "Number_Comments", "Number_Threads")
+# Replace NA with 0
+conv <- function(x) ifelse(is.na(x), 0, x)
+for.comm.sum$Number_Threads <- conv(for.comm.sum$Number_Threads)
+# Scale
+for.comm.sum$Number_Comments_s <- for.comm.sum$Number_Comments / max(for.comm.sum$Number_Comments)
+for.comm.sum$Number_Threads_s <- for.comm.sum$Number_Threads / max(for.comm.sum$Number_Threads)
+# Melt
+for.melt <- melt(for.comm.sum[,c(1,4,5)], "Post_Date")
 # Convert to date
-for.comm.sum$post_date <- as.Date(ymd(for.comm.sum$post_date))
+for.melt$Post_Date <- as.Date(ymd(for.melt$Post_Date))
 # Plot
-ggplot(for.comm.sum, aes(x=post_date, y=n)) +
-  geom_line() +
-  scale_x_date() +
-  theme_bw()
+ggplot(for.melt, aes(x=Post_Date, y=value, colour=variable)) +
+  geom_line(size=1) +
+  scale_x_date(name="Date",
+               labels = date_format("%m/%Y"),
+               breaks = "1 month") +
+  theme_bw() +
+  scale_y_continuous(name="Scaled number of posts/comments")
 ```
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
