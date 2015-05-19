@@ -121,4 +121,4 @@ ggplot(for.melt, aes(x=Post_Date, y=value, colour=variable)) +
   scale_y_continuous(name="Scaled number of posts/comments")
 ```
 
-![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.pdf)
+![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
