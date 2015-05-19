@@ -47,8 +47,6 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 	- [/generic_helper_functions](https://github.com/JasperHG90/MOOCs/tree/master/workflow/generic_helper_functions)
 	- [/store_coursera_exports](https://github.com/JasperHG90/MOOCs/tree/master/workflow/store_coursera_exports)
 
-## Contact
+## Contact & Feedback
 
 If you have questions, comments, or other requests, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
-
-## Feedback and Collaboration
