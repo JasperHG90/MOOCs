@@ -14,7 +14,9 @@ I convert all of the Coursera MySQL dumps to SQLite databases. SQLite databases 
 
  1. As mentioned previously, I work in a Vagrant virtual machine. This means that oftentimes, I need to re-populate my VM with data if something goes wrong. It's way simpler to copy SQLite files into the box as part of the standard VM population, since they are simply 'files' and can easily be copied.
  2. I find it infinitely simpler to connect to a SQLite database from within R/Python. 
- 3. It is easy to switch between R and Python without having to use CSVs, TXTs etc. 
+ 3. It is easy to switch between R and Python without having to use CSVs, TXTs etc.
+
+However, I have added a quick how-to on working with R & MySQL in the "/R_and_RMySQL" folder. You probably want to check this out if you're not planning on converting MySQL to SQLite databases. In most scripts, I query from SQLite databases. Though not very difficult, you will have to alter this code a bit if you want to query directly from a MySQL database.
 
 # Working with the MySQL coursera data dumps
 
@@ -72,6 +74,10 @@ To convert, download the script. Then, navigate to the folder where the script i
 	- sh mysql2sqlite.sh --no-data -u root -p <MySQLtablename> | sqlite3 /path/to/folder/<dbname>.sqlite
 
 You will be prompted to enter the mySQL password, after which the MySQL database will be converted to the location you specified.
+
+## Working with MySQL databases directly from within R
+
+Please see a short how-to in the "/R_and_RMySQL" folder
 
 
 
