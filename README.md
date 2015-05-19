@@ -13,6 +13,8 @@
 
 This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" which could be useful for working with these data. Most of the scripts have been written in the R statistical Language. Some of them are written in Python. This repository of scripts will be updated sporadically to add new functions or update existing ones. Any errors found in these scripts are mine. 
 
+Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a Vagrant box in the "/workflow" folder that you could use. In this case, all of these guides should work seamlessly.
+
 Most of these scripts will be frequently updated. It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts highly interpretable & informative.
 
 ## Additional Information
