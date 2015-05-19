@@ -39,8 +39,13 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 ## Folder structure
 
 - [/coursera_data_dumps](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps)
+	- [/R_and_MySql](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps/R_and_MySQL)
 	- [/clickstream_data](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps/clickstream_data)
+	- [/forum_data](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps/forum_data)
 - [/workflow](https://github.com/JasperHG90/MOOCs/tree/master/workflow)
+	- [/Vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs)
+	- [/generic_helper_functions](https://github.com/JasperHG90/MOOCs/tree/master/workflow/generic_helper_functions)
+	- [/store_coursera_exports](https://github.com/JasperHG90/MOOCs/tree/master/workflow/store_coursera_exports)
 
 ## Contact
 
