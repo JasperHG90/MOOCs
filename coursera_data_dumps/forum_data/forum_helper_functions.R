@@ -1,5 +1,5 @@
 '
-This script contains all the helper functions used on the forum data that Coursera supplied us with.
+This script contains the helper functions used to process the Coursera forum data.
 
 Written by: Jasper Ginn (j.h.ginn@cdh.leidenuniv.nl)
 Date: 23-03-2015
@@ -9,7 +9,11 @@ Date: 23-03-2015
 
 '
 FUNCTION 1: Convenience function that converts Unix timestamps into date/time stamps
+  Parameters:
+    object (integer)
+      integer in an epoch time format to convert
 '
+
 convertunixtm <- function(object) {
   return(as.POSIXct(as.numeric(as.character(object)),
              origin="1970-01-01",tz="GMT"))
@@ -17,7 +21,10 @@ convertunixtm <- function(object) {
 }
 
 '
-FUNCTION 3: Strip all html tags from text (source: http://stackoverflow.com/questions/17227294/removing-html-tags-from-a-string-in-r)
+FUNCTION 3: Strip all html tags from text 
+  parameters:
+    string (string)
+      Character from which to strip HTML 
 '
 removehtml <- function(string) {
   return(gsub("<.*?>", " ", string))
@@ -25,6 +32,9 @@ removehtml <- function(string) {
 
 '
 FUNCTION 4: Strip all URLs from a string and replace with ""
+  paramters:
+    string (string)
+      Character from which to strip all URLs
 '
 
 removeurl <- function(string) {
@@ -32,38 +42,14 @@ removeurl <- function(string) {
 }
 
 '
-FUNCTION 5: Remove common terms
+FUNCTION 5: Remove whitespace, punctuation & newlines / tabs
+  parameters
+    string (string)
+      Character from which to strip excess whitespace (e.g. leading and trailing) and punctuation and 
+      / or newlines & tabs etc.
 '
 
-removeCommonTerms <- function (x, pct) 
-{
-  stopifnot(inherits(x, c("DocumentTermMatrix", "TermDocumentMatrix")), 
-            is.numeric(pct), pct > 0, pct < 1)
-  m <- if (inherits(x, "DocumentTermMatrix")) 
-    t(x)
-  else x
-  t <- table(m$i) < m$ncol * (pct)
-  termIndex <- as.numeric(names(t[t]))
-  if (inherits(x, "DocumentTermMatrix")) 
-    x[, termIndex]
-  else x[termIndex, ]
-}
-
-'
-FUNCTION 6: Remove excess whitespace
-'
-
-removeExcessWS <- function(string) {
-  temp <- gsub("   ", " ", string)
-  temp <- gsub("  ", " ", temp)
-  return(temp)
-}
-
-'
-FUNCTION 7: Remove whitespace, punctuation & newlines / tabs
-'
-
-whiteSpaceFix <- function(x) {
+whiteSpaceFix <- function(string) {
   # Strip punctuation
   temp <- gsub("[[:punct:]]", "", x)
   # Take sentence apart
@@ -73,26 +59,6 @@ whiteSpaceFix <- function(x) {
   # Reconstruct and take out punctuation + newlines etc.
   checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
   temp <- temp[!checkF(temp) == TRUE]
-  # Paste
+  # Paste & collapse
   paste0(temp, collapse = " ") 
 }
-
-'
-FUNCTION 7: Remove leading whitespace
-'
-removeLeading <- function (x)  sub("^\\s+", "", x)
-
-'
-FUNCTION 8: Remove trailing whitespace
-'
-removeTrailing <- function (x) sub("\\s+$", "", x)
-
-'
-FUNCTION 9: Remove new lines
-'
-removeNewLine <- function(x) gsub("[\r\n]", " ", x)
-
-'
-FUNCTION 10: Remove tabs
-'
-removeTabs <- function(x) gsub("[\t]", " ", x)
