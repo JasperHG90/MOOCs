@@ -43,7 +43,7 @@ for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outV
 
 # Preprocessing
 
-One of the problems with the forum data is that the text is wrapped in html code. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
+One of the problems with the forum data is that the text is wrapped in html code. Before exploring relatively advanced procedures (such as [stemming](http://en.wikipedia.org/wiki/Stemming) etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
 
 ```{r}
 # Strip html
@@ -52,7 +52,7 @@ for.comm$cleaned_text <- removehtml(for.comm$post_text)
 for.comm$cleaned_text <- removeurl(for.comm$cleaned_text)
 ```
 
-This approach does create an issue with character encoding. We want the text to be in ASCII format if we are to process it in R:
+This approach does create an issue with [character encoding](http://en.wikipedia.org/wiki/Character_encoding). We want the text to be in [ASCII format](http://en.wikipedia.org/wiki/ASCII) if we are to process it in R:
 
 ```{r}
 # Convert to ASCII
@@ -65,7 +65,7 @@ By now, the text should be cleaned of most issues.
 
 # Further processing the forum text
 
-We can further process the comments if so desired. This requires the 'tm' and 'SnowballC' packages for text processing:
+We can further process the comments if so desired. This requires the [tm](http://cran.r-project.org/web/packages/tm/index.html) and [SnowballC](http://cran.r-project.org/web/packages/SnowballC/index.html) packages for text processing:
 
 ```{r}
 # Turn forum comments into corpus
