@@ -30,11 +30,55 @@ install.packages("RMySQL")
 library(RMySQL)
 ```
 
+Assuming you have already stored data in a MySQL database, you can connect to a table like this:
+
 ```{r}
 # Specify credentials
 usern = "root"
 dbname = "terror001"
 password = ""
+# Connect
 con = dbConnect(MySQL(), username=usern, dbname=dbname, password = password)
+```
+
+It is straightforward to get the tables residing in a database
+
+```{r}
+# List tables
 dbListTables(con)
+```
+
+You can also list the fields in a table:
+
+```{r}
+# List fields
+dbListFields(con, 'forum_comments')
+```
+
+There are several ways to select a table. For small tables, you can query the entire table and process in R, like so:
+
+```{r}
+# Read table
+tab <- dbReadTable(con, "activity_log")
+```
+
+However, for larger tables you might want to use SQL statements before quering the data:
+
+```{r}
+# Read part of a table
+tab <- dbGetQuery(con, "SELECT * FROM forum_comments")
+```
+
+Don't forget to disconnect!
+
+```{r}
+# Disconnect
 dbDisconnect(con)
+```
+
+# More resources:
+
+ 1. [Accessing a Database from R](http://www.stat.berkeley.edu/~nolan/stat133/Fall05/lectures/SQL-R.pdf)
+ 2. [RMySQL documentation](http://cran.r-project.org/web/packages/RMySQL/RMySQL.pdf)
+ 3. [RMySQL basics](https://mkmanu.wordpress.com/2014/07/24/r-and-mysql-a-tutorial-for-beginners/)
+ 4. [In case installing RMySQL on Windows gives you issues](http://stackoverflow.com/questions/5223113/using-mysql-in-r-for-windows)
