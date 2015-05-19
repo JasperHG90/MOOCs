@@ -72,9 +72,9 @@ You can query mongodb results from within R using the rmongodb package. You can 
 	3. http://www.joyofdata.de/blog/mongodb-state-of-the-r-rmongodb/
 	4. http://cran.r-project.org/web/packages/rmongodb/vignettes/rmongodb_cheat_sheet.pdf
 
-## Using Pymongo to query data in python
+## Using [Pymongo](http://api.mongodb.org/python/current/) to query data in python
 
-You can query mongodb results from within Python using the [pymongo](http://api.mongodb.org/python/current/) module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
+You can query mongodb results from within Python using the pymongo module. I've incorporated some basic commands in the 'iplookup' script in the '/clickstream_data/ip_locations' folder
 
 #### Useful resources for pymongo
 
