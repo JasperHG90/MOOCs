@@ -7,7 +7,7 @@ output: html_document
 
 # Introduction
 
-This document covers some basic text processing in R using forum comments.
+This document covers some basic methods to query and process Coursera forum data. Find an overview of the data [here](https://partner.coursera.help/hc/en-us/articles/203586039-Manual-Data-Exports).
 
 ```{r}
 # Set global knitr Options
