@@ -1,11 +1,8 @@
 # Install R packages
 rm(list=ls())
 
-# WD
-DIRECT <- "/vagrant/"
-
 # Read table
-reqs <- read.table(paste0(DIRECT,"R_requirements.txt"), header=F, stringsAsFactors=F)[,1]
+reqs <- read.table("/vagrant/R_requirements.txt"), header=F, stringsAsFactors=F)[,1]
 
 # Install packages
-install.packages(reqs, repos='http://cran.xl-mirror.nl/')
+for(package in reqs) if(!require(package, character.only=TRUE)) install.packages(package, repos='http://cran.xl-mirror.nl/')

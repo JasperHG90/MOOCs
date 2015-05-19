@@ -6,14 +6,12 @@ data.table
 lubridate
 devtools
 dplyr
-foreach
 RSQLite
 rmongodb
 caret
-stargazer
-xtable
 knitr
 yaml
 htmltools
 caTools
 rmarkdown
+RMySQL
