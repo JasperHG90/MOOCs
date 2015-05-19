@@ -26,7 +26,7 @@ I mostly work from within [vagrant virtual boxes](http://docs.vagrantup.com/v2/b
 3. It's easy to install experimental software, and doing so will not affect your primary OS.
 4. They allow for a trial-and-error approaches.
 
-You can find more information on vagrant boxes in the '/vagrant_box_MOOCs' folder. 
+You can find more information on vagrant boxes in the [/vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs) folder. 
 
 ## Using these scripts
 
