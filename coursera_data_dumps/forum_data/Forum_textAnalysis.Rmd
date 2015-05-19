@@ -1,5 +1,5 @@
 ---
-title: "Working with the Coursera Forum Data"
+title: "Basic Text Processing in R"
 author: "Jasper Ginn"
 date: "`r Sys.Date()`"
 output: html_document
@@ -173,135 +173,16 @@ knitr::kable(head(res[,-c(7,8)]))
 
 However, advanced NLP support is much more developed in [Python](http://www.nltk.org/). 
 
-# Advanced text processing
+# Further information on text processing
 
-```{r}
-# Create a term document matrix
-tdm <- TermDocumentMatrix(t)
-# Inspect it
-tdm
-#inspect(tdm[1:50, 1:12])
+Find more information here:
 
-# Create df
-tdm.df <- as.data.frame(as.matrix(tdm))
-# Get me them rowsums!!!!
-tdm.df.sum <- data.frame(rowSums(tdm.df))
-tdm.df.sum$term <- rownames(tdm.df.sum)
-tdm.df.sum <- arrange(tdm.df.sum, desc(rowSums.tdm.df.))
-
-# Create a document term matrix (the transpose of a term document matrix)
-#DTM <- DocumentTermMatrix(t)
-
-# Find the most frequently used terms (e.g. terms that have been used 10 times)
-freq <- findFreqTerms(tdm, 100)
-
-# Find associations between words (third element is the strength of association)
-findAssocs(tdm, "prospective", 0.6)
-
-# Do this for each word in the freq list
-b <- lapply(freq, function(x){
-  findAssocs(tdm, x, 0.4)
-})
-# Take out empty vectors
-k <- b[!sapply(b, mode) == "list"]
-# Create dataframe out of every one
-dflist <- function(x){
-  z <- x
-  #print(z)
-  to <- attributes(z[[1]])$dimnames[[1]]
-  from <- attributes(z[[1]])$dimnames[[2]]
-  l<-unname(unlist(z[[1]]))
-  statement <- length(to) == 0
-  if(statement == TRUE) {
-    return("")
-  } else{
-    l<-l[1:length(l),]
-    #print(from, to, l)
-    dt <-as.data.frame(cbind(from, to, l))
-    #dt <- as.data.frame(Source = from,
-     #                Target = to,
-      #               Weight = l)
-    return(dt)
-  }
-}
-
-# Loop
-s1 <- dflist(k[1])
-for(i in 2:length(k)){
-  f <- dflist(k[i])
-  if(f != "") {
-    s1 <- rbind(s1, f)
-  }
-}
-
-# Success!!!
-colnames(s1) <- c("Source", "Target", "Weight")
-# print as csv
-write.csv(s1, "/users/jasper/desktop/nodes.csv", row.names=F)
-
-# Rbindlist
-require(data.table)
-y <- rbindlist(dflist)
-
-f <- dflist(k[2])
-
-b = list()
-for(i in 1:10){
-  print(dflist(k[i]))
-  b <- c(b, dflist(k[i]))
-}
+1. [TM package vignette on CRAN](http://cran.r-project.org/web/packages/tm/vignettes/tm.pdf)
+2. [Introduction to basic text mining in R](http://www.unt.edu/rss/class/Jon/Benchmarks/TextMining_L_JDS_Jan2014.pdf)
+3. [Basic string manipulation](https://chemicalstatistician.wordpress.com/2014/02/27/useful-functions-in-r-for-manipulating-text-data/)
+4. [Further processing and modeling](http://www.vikparuchuri.com/blog/natural-language-processing-tutorial/)
 
 
-print(dflist(k[8]))
-k[5]
-
-sapply(k, mode)
-k[1]
-z <- k[1]
-to <- attributes(z[[1]])$dimnames[[1]]
-from <- attributes(z[[1]])$dimnames[[2]]
-l<-unname(unlist(z[[1]]))
-l<-l[1:length(l),]
-from <- rep(from, length(l))
-dt <- data.frame(Source = from,
-           Target = to,
-           Weight = l)
-# Remove sparse terms
-tdm.common <- removeSparseTerms(tdm, 0.95)
-dim(tdm.common)
-dim(tdm)
-inspect(tdm.common)
-
-# Turn TDM matrix into normal matrix
-require(slam)
-tdm.dense <- as.matrix(tdm.common)
-# Look at the matrix
-tdm.dense
-# Reshape
-require(reshape2)
-tdm.dense <- melt(tdm.dense, value.name="count")
-head(tdm.dense)
-
-# Create the graph (per post)
-
-ggplot(tdm.dense, aes(x = Docs, y = Terms, fill = log10(count))) +
-       geom_tile(colour = "white") +
-       scale_fill_gradient(high="#FF0000" , low="#FFFFFF")+
-       ylab("") +
-       theme(panel.background = element_blank()) +
-       theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
-
-#compute document dissimilarity based on the term-document matrix, need to install the proxy package
-#it's about distance between 2 documents
-install.packages('proxy')
-require('proxy')
-dis=dist(as.matrix(tdm), method="cosine")
-#the dissimilarity is between documents
-#visualize the dissimilarity results to matrix, here we are just printing part of the big matrix
-as.matrix(dis)[1:10, 1:10]
-#visualize the dissimilarity results as a heatmap
-heatmap(as.matrix(dis)[1:50, 1:50])
-```
 
 
 
