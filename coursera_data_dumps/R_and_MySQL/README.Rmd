@@ -1,0 +1,40 @@
+---
+title: "Using R with MySQL"
+author: "Jasper Ginn"
+date: "19 May 2015"
+output: html_document
+---
+
+# Introduction
+
+This document briefly outlines how you can use R to access MySQL databases.
+
+```{r}
+# Set global knitr Options
+require(knitr)
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
+```
+
+# Connecting to the database
+
+Firstly, make sure that MySQL is running by opening up a terminal and executing the following line:
+
+ - sudo /usr/local/mysql/support-files/mysql.server start
+
+In R, you need to install the "RMySQL" package, which you can do as follows
+
+```{r}
+# Install packages
+install.packages("RMySQL")
+# Load
+library(RMySQL)
+```
+
+```{r}
+# Specify credentials
+usern = "root"
+dbname = "terror001"
+password = ""
+con = dbConnect(MySQL(), username=usern, dbname=dbname, password = password)
+dbListTables(con)
+dbDisconnect(con)
