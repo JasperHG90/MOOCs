@@ -66,7 +66,7 @@ for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE)
 str(for.comm)
 # Col names
 coln <- colnames(for.comm)
-outVar <- c("user_id", "edit_time", "user_agent", "text_type")
+outVar <- c("edit_time", "user_agent", "text_type")
 # Take out variables listed above
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
