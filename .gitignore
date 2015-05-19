@@ -22,5 +22,4 @@
 *.html
 
 # VM
-*.vagrant/
-*/workflow/Vagrant_box_MOOCs/.vagrant/*
+*/.vagrant/
