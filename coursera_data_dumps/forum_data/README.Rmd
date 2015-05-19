@@ -32,7 +32,7 @@ data.dir <- "/users/jasper/desktop/TEMP"
 files <- paste0(dir_end(data.dir), list.files(data.dir))
 ```
 
-You can use the "dbQA" ("database Quick Access") function to get all table names residing in a SQLite database, e.g.:
+You can use the "dbQA" ("database Quick Access") function to get all table names residing in a [SQLite](https://www.sqlite.org/) database, e.g.:
 
 ```{r}
 # Get all table names
@@ -71,7 +71,7 @@ outVar <- c("edit_time", "user_agent", "text_type")
 for.comm <- for.comm[, which(!sapply(colnames(for.comm), function(x) x %in% outVar))]
 ```
 
-We can convert and format the UNIX timestamps like so:
+We can convert and format the [UNIX timestamps](http://www.unixtimestamp.com/) like so:
 
 ```{r}
 # Convert unix timestamp
@@ -139,4 +139,4 @@ ggplot(for.melt, aes(x=Post_Date, y=value, colour=variable)) +
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
 
-One interesting observation to make here is that, while the number of comments and the number of thread posts follow the same pattern (correlation = 0.8), a high number of threads initiated does not seem to drive the number of comments. It's likely that these are driven by e.g. end-of-week quizzes.
+One interesting observation to make here is that, while the number of comments and the number of thread posts follow the same pattern (correlation = 0.8), a high number of threads initiated does not seem to drive the number of comments. It's likely that these are influenced by e.g. end-of-week quizzes and other assignments.
