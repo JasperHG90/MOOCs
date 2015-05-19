@@ -7,13 +7,13 @@ output: html_document
 
 # Introduction
 
-This document introduces some convenience functions to query clickstream data from a mongodb instance.  
+This document introduces some convenience functions to query [clickstream data](http://en.wikipedia.org/wiki/Clickstream) from a [mongodb](https://www.mongodb.org/) instance.  
 
 - Written by: Jasper Ginn
 - Affiliation: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 13-05-2015
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
 # Set global knitr Options
 require(knitr)
 opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, results = 'asis')
@@ -59,7 +59,7 @@ One benefit of working with mongo is that there are several operations that can 
 
 Below, you will see one way of doing this
 
-```{r, echo=TRUE, results='hide'}
+```{r}
 # Query unique URLs
 mongo <- mongo.create()
 if(mongo.is.connected(mongo) == TRUE) {
