@@ -7,7 +7,7 @@ output: html_document
 
 # Introduction
 
-This document outlines several ways to work with the Coursera forum data.
+This document covers some basic text processing in R using forum comments.
 
 ```{r}
 # Set global knitr Options
@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "tm", "SnowballC", "lubridate", "ggplot2", "scales", "data.table")
+packages <- c("RSQLite", "dplyr", "ggplot2", "scales")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -98,140 +98,3 @@ ggplot(for.comm.sum, aes(x=post_date, y=n)) +
 ```
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
-
-# Preprocessing
-
-One of the problems with the forum data is that the text is wrapped in html code. Before exploring relatively advanced procedures (such as stemming etc.),  we can pre-process this data with some simple convenience functions to strip the html and replace all URLs:
-
-```{r}
-# Strip html
-for.comm$cleaned_text <- removehtml(for.comm$post_text)
-# Take out URLs
-for.comm$cleaned_text <- removeurl(for.comm$cleaned_text)
-```
-
-This approach does create an issue with character encoding. We want the text to be in ASCII format if we are to process it in R:
-
-```{r}
-# Convert to ASCII
-for.comm$cleaned_text <- iconv(for.comm$cleaned_text, "latin1", "ASCII", sub="")
-# Trim leading and trailing whitespace for every word. This we do by taking the entire message apart word by word and reconstructing it after having stripped the whitespace issues. This function also takes out punctuation, newlines & tabs.
-whiteSpaceFix <- function(x) {
-  # Take sentence apart
-  temp <- unlist(strsplit(x, " "))
-  # Take out whitespaces
-  temp <- temp[sapply(temp, function(b) b != "")]
-  # Reconstruct and take out punctuation + newlines etc.
-  checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
-  temp <- temp[!checkF(temp) == TRUE]
-  # Paste
-  paste0(temp, collapse = " ") 
-}
-# Run
-for.comm$cleaned_text <- sapply(for.comm$cleaned_text, whiteSpaceFix)
-```
-
-By now, the text should be cleaned of most issues. 
-
-# Further processing the forum text
-
-We can further process the comments if so desired. This requires the 'tm' and 'SnowballC' packages for text processing:
-
-```{r}
-# Turn forum comments into corpus
-corp <- VCorpus(VectorSource(for.comm$cleaned_text))
-# Show summary
-summary(corp)
-# Essentially, we have a plain text document for each forum post.
-# Inspect
-inspect(corp)
-
-# Some more pre-processing : -----
-
-# Replace all capitalized letters with lower-case
-corp <- tm_map(corp, tolower)
-# Remove punctuation
-corp <- tm_map(corp, removePunctuation)
-# Strip redundant whitespace
-corp <- tm_map(corp, stripWhitespace)
-# Remove any numbers present
-corp <- tm_map(corp, removeNumbers)
-# Remove general stopwords
-corp <- tm_map(corp, removeWords, c(stopwords("english"), "one", "can", "also", "use"))
-```
-
-We can now apply some functions to stem the data. This can be a bit tricky.
-
-```{r}
-# Remove all whitespace before and after each word.
-conv <- function(x) paste(unlist(strsplit(stripWhitespace(x), " ")), collapse = " ")
-# Apply
-corp <- tm_map(corp, conv)
-# Define a convenience function to stem each word using porter stemmer
-conv <- function(x) paste(stemDocument(unlist(strsplit(x, " "))), collapse = " ")
-# Map stemmer
-corp.t <- tm_map(corp, conv)
-# Remove other words
-corp.t <- tm_map(corp, removeWords, c("will", 
-                              "like", 
-                              "new", 
-                              "used",
-                              "lot",
-                              "etc",
-                              "get",
-                              "put",
-                              "see",
-                              "week",
-                              "tell"))
-# Re-corpus
-corp.t <- VCorpus(VectorSource(corp.t))
-```
-
-We can now do some fun stuff like create a wordcloud:
-
-```{r}
-# Create wordcloud
-require(wordcloud)
-wordcloud(corp.t, scale=c(2.5,0.5), max.words=150, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(5, "Set1"))
-```
-
-![wordcloud](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/wordcloud.png)
-
-While good enough for most applications, you can also use slightly more complicated stemmers. The "koRpus" package allows for [lemmanization](http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html). It uses the [treetagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/#Linux) tool for this, which you should install prior to running the following line of code. 
-
-```{r}
-# Install koRpus
-ifelse(!require(koRpus), install.packages("koRpus"), require(koRpus))
-# Use treetagger - this is also a bit tricky. Get install instructions here: http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/#Linux. Also, do not forget to set the path in 'TT.options' to the treetagger installation files.
-tagRes <- function(x) {
-  TT <- treetag(x, treetagger="manual", 
-          format="obj",
-          TT.tknz=FALSE , 
-          lang="en",
-          TT.options=list(path="/users/jasper/downloads/treeee", 
-                          preset="en"))
-  # Return data frame
-  as.data.frame(TT@TT.res)
-  }
-# Run
-res <- lapply(corp[1:10], tagRes)
-# To df
-res <- rbindlist(res)
-# Print
-knitr::kable(head(tagRes[,-c(7,8)]))
-```
-
-|token      |tag |lemma      | lttr|wclass    |desc                                  |
-|:----------|:---|:----------|----:|:---------|:-------------------------------------|
-|welcome    |JJ  |welcome    |    7|adjective |Adjective                             |
-|course     |NN  |course     |    6|noun      |Noun, singular or mass                |
-|leiden     |NN  |<unknown>  |    6|noun      |Noun, singular or mass                |
-|university |NN  |university |   10|noun      |Noun, singular or mass                |
-|think      |VVP |think      |    5|verb      |Verb, non-3rd person singular present |
-|important  |JJ  |important  |    9|adjective |Adjective                             |
-
-However, advanced NLP support is much more developed in [Python](http://www.nltk.org/). 
-
-
-
-

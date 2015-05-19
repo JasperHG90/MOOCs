@@ -19,19 +19,22 @@ convertunixtm <- function(object) {
 '
 FUNCTION 3: Strip all html tags from text (source: http://stackoverflow.com/questions/17227294/removing-html-tags-from-a-string-in-r)
 '
-removehtml <- function(htmlString) {
-  return(gsub("<.*?>", " ", htmlString))
+removehtml <- function(string) {
+  return(gsub("<.*?>", " ", string))
 }
 
 '
 FUNCTION 4: Strip all URLs from a string and replace with ""
 '
+
 removeurl <- function(string) {
   return(gsub("(f|ht)tp(s?)://(.*)[.][a-z]+", "", string))
 }
+
 '
 FUNCTION 5: Remove common terms
 '
+
 removeCommonTerms <- function (x, pct) 
 {
   stopifnot(inherits(x, c("DocumentTermMatrix", "TermDocumentMatrix")), 
@@ -54,6 +57,24 @@ removeExcessWS <- function(string) {
   temp <- gsub("   ", " ", string)
   temp <- gsub("  ", " ", temp)
   return(temp)
+}
+
+'
+FUNCTION 7: Remove whitespace, punctuation & newlines / tabs
+'
+
+whiteSpaceFix <- function(x) {
+  # Strip punctuation
+  temp <- gsub("[[:punct:]]", "", x)
+  # Take sentence apart
+  temp <- unlist(strsplit(temp, " "))
+  # Take out whitespaces
+  temp <- temp[sapply(temp, function(b) b != "")]
+  # Reconstruct and take out punctuation + newlines etc.
+  checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
+  temp <- temp[!checkF(temp) == TRUE]
+  # Paste
+  paste0(temp, collapse = " ") 
 }
 
 '
