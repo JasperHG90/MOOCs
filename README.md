@@ -38,17 +38,8 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 
 ## Folder structure
 
-				/clickstream_data
-
-				/documentation/
-
-				/forum_data
-
-				/general_data
-
-				/vagrant_box_MOOCs
-
-				/workflow
+	[/coursera_data_dumps](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps)
+	[/workflow](https://github.com/JasperHG90/MOOCs/tree/master/workflow)
 
 ## Contact
 
