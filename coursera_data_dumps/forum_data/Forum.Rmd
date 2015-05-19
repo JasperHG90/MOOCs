@@ -111,14 +111,32 @@ for.comm.sum$Number_Threads_s <- for.comm.sum$Number_Threads / max(for.comm.sum$
 for.melt <- melt(for.comm.sum[,c(1,4,5)], "Post_Date")
 # Convert to date
 for.melt$Post_Date <- as.Date(ymd(for.melt$Post_Date))
+# Plot defaults
+Plot.defaults <- list(axis.text.size = 14,
+                      legend.text.size = 16,
+                      axis.line.size = 0.8,
+                      legend.pos = "right",
+                      grid.grey = "#D3D3D3")
 # Plot
 ggplot(for.melt, aes(x=Post_Date, y=value, colour=variable)) +
   geom_line(size=1) +
   scale_x_date(name="Date",
                labels = date_format("%m/%Y"),
                breaks = "1 month") +
+  scale_y_continuous(name="Scaled number of posts/comments") +
   theme_bw() +
-  scale_y_continuous(name="Scaled number of posts/comments")
+  theme(legend.text = element_text(size = Plot.defaults$legend.text.size), 
+           legend.title = element_blank(),
+           axis.title.x = element_text(size=Plot.defaults$legend.text.size, 
+                                    colour = "black"),
+           axis.title.y = element_text(size=Plot.defaults$legend.text.size, 
+                                    colour = "black"),
+           axis.text.x = element_text(size=Plot.defaults$axis.text.size,
+                                   colour = "black"),
+           axis.text.y = element_text(size=Plot.defaults$axis.text.size,
+                                   colour = "black")) 
 ```
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
+
+One interesting observation to make here is that, while the number of comments and the number of thread posts follow the same pattern (correlation = 0.8), a high number of threads initiated does not seem to drive the number of comments. It's likely that these are driven by e.g. end-of-week quizzes.
