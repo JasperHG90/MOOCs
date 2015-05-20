@@ -38,7 +38,7 @@ You can use the "dbQA" ("database Quick Access") function to get all table names
 # Get all table names for SQLite db
 tabs <- dbQA(files[1], table = NULL, show.table=TRUE, db.type = "sqlite")
 # Get all table names for MySQL db (NOTE: make sure the MySQL server is up and running)
-tabs <- dbQA("terror001", table = NULL, show.table=TRUE, db.type = "mysql", username = "root", password="OLL2015")
+tabs <- dbQA("terror001", table = NULL, show.table=TRUE, db.type = "mysql", username = "root", password="")
 # Print
 knitr::kable(data.frame(Table_name = tabs))
 ```
