@@ -10,13 +10,9 @@ More Information:
 
 ### A note on my use of SQLite databases
 
-I convert all of the Coursera MySQL dumps to SQLite databases. SQLite databases work in a similar way to MySQL databases. However, they are serverless and take a hit on security (among many other differences). So, why do it? 
+I convert all of the Coursera MySQL dumps to SQLite databases and use these interchangeably. SQLite databases work in a similar way to MySQL databases. However, they are serverless and take a hit on security (among other differences). As I previously mentioned, I work in a Vagrant box. This means that oftentimes, I need to re-populate my VM with data if something goes wrong. I find it's simples to copy SQLite files into the box as part of the standard VM population. 
 
- 1. As mentioned previously, I work in a Vagrant virtual machine. This means that oftentimes, I need to re-populate my VM with data if something goes wrong. It's way simpler to copy SQLite files into the box as part of the standard VM population, since they are simply 'files' and can easily be copied.
- 2. I find it infinitely simpler to connect to a SQLite database from within R/Python. 
- 3. It is easy to switch between R and Python without having to use CSVs, TXTs etc.
-
-However, I have added a quick how-to on working with R & MySQL in the "/R_and_RMySQL" folder. You probably want to check this out if you're not planning on converting MySQL to SQLite databases. In most scripts, I query from SQLite databases. Though not very difficult, you will have to alter this code a bit if you want to query directly from a MySQL database.
+However, I have added a quick how-to on working with R & MySQL in the "/R_and_RMySQL" folder. I also altered the [SQL quick access helper function](https://github.com/JasperHG90/MOOCs/blob/master/workflow/generic_helper_functions/helper_functions.R) to be able to query from both SQLite & MySQL databases. 
 
 # Working with the MySQL coursera data dumps
 
