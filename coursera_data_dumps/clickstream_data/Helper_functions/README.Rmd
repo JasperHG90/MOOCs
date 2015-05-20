@@ -28,7 +28,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 rm(list=ls())
 
 # Packages
-packages <- c("rmongodb", "jsonlite", "data.table", "dplyr", "stargazer", "ggplot2", "scales")
+packages <- c("rmongodb", "jsonlite", "data.table", "dplyr", "ggplot2", "scales")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 
 # Load helper functions
@@ -74,7 +74,7 @@ urls
 Every video has multiple urls. So, when a user selects either the flash or html5 player it creates a different URL, e.g.
 
 ```{r}
-stargazer(as.data.frame(urls[which(grepl("lecture_id=35", urls))]), summary=F, type="html")
+knitr::kable(as.data.frame(urls[which(grepl("lecture_id=35", urls))]))
 ```
 
 So we select each of these URLs and query the data for them. Since we are interested in the *user actions* with the video, we can construct a single call that will return these actions in one go. (**NOTE: There are probably more efficient ways of doing this, but it gets the job done**). 
