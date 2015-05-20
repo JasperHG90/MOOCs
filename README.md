@@ -11,7 +11,7 @@
 
 ## Introduction
 
-This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" which could be useful for working with these data. Most of the scripts have been written in the [R statistical Language](http://www.r-project.org/). Some of them are written in [Python](https://www.python.org/). This repository of scripts will be updated sporadically to add new functions or update existing ones. Any errors found in these scripts are mine. 
+This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" which could be useful for working with these data. Most of the scripts have been written in the [R statistical Language](http://www.r-project.org/). Some of them are written in [Python](https://www.python.org/). This repository of scripts will be updated sporadically to add new functions or update existing ones. 
 
 Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a [Vagrant box](http://docs.vagrantup.com/v2/boxes.html) in the "/workflow" folder that you could use. When using the vagrant box, all of these guides should work seamlessly.
 
