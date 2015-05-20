@@ -15,7 +15,7 @@ This repository contains semi-cleaned scripts and documentation which you can us
 
 Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a [Vagrant box](http://docs.vagrantup.com/v2/boxes.html) in the "/workflow" folder that you could use. When using the vagrant box, all of these guides should work seamlessly.
 
-Most of these scripts will be frequently updated. It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts highly interpretable & informative.
+Most of these scripts will be frequently updated. It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
 
 ## Additional Information
 
@@ -45,7 +45,6 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 - [/workflow](https://github.com/JasperHG90/MOOCs/tree/master/workflow)
 	- [/Vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs)
 	- [/generic_helper_functions](https://github.com/JasperHG90/MOOCs/tree/master/workflow/generic_helper_functions)
-	- [/store_coursera_exports](https://github.com/JasperHG90/MOOCs/tree/master/workflow/store_coursera_exports)
 
 ## Contact & Feedback
 
