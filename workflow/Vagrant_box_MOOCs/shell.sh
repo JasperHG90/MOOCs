@@ -30,7 +30,7 @@ EOF
 
 ## Set time
 
-echo "Europe/Amsterdam" > sudo /etc/timezone
+echo "Europe/Amsterdam" > /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
 ## Folder creation
@@ -84,7 +84,7 @@ EOF
 
 echo "Installing R-base..."
 # Add cran to list of sources (to get the last version of R)
-echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> sudo /etc/apt/sources.list
+echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" | sudo tee --append /etc/apt/sources.list
 # Add public keys
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
