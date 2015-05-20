@@ -21,7 +21,7 @@ opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = FALSE, resu
 # Clean wd
 rm(list=ls())
 # Load packages
-packages <- c("RSQLite", "dplyr", "ggplot2", "scales", "reshape2")
+packages <- c("RSQLite", "dplyr", "ggplot2", "scales", "reshape2", "RMySQL")
 for(package in packages) if(!require(package, character.only=TRUE)) install.packages(package)
 # Load general helper functions
 source("/Users/Jasper/Documents/Github.projects/MOOCs/workflow/generic_helper_functions/helper_functions.R")
@@ -102,7 +102,8 @@ for.comm.sum <- merge(for.comm %>%
                         group_by(post_date) %>%
                         tally() %>%
                         as.data.frame(.),
-                      by = "post_date", all=TRUE)
+                      by = "post_date", 
+                      all=TRUE)
 # Rename
 colnames(for.comm.sum) <- c("Post_Date", "Number_Comments", "Number_Threads")
 # Replace NA with 0

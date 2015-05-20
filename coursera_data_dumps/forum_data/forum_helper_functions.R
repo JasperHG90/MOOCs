@@ -51,14 +51,22 @@ FUNCTION 5: Remove whitespace, punctuation & newlines / tabs
 
 whiteSpaceFix <- function(string) {
   # Strip punctuation
-  temp <- gsub("[[:punct:]]", "", x)
+  temp <- gsub("[[:punct:]]", "", string)
   # Take sentence apart
   temp <- unlist(strsplit(temp, " "))
-  # Take out whitespaces
-  temp <- temp[sapply(temp, function(b) b != "")]
-  # Reconstruct and take out punctuation + newlines etc.
-  checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
-  temp <- temp[!checkF(temp) == TRUE]
-  # Paste & collapse
-  paste0(temp, collapse = " ") 
+  # Control statement. If the result of the above is an empty character, then return NULL
+  if(length(temp) == 0) {
+    # Print message
+    print("Empty character. Moving on . . . ")
+    # Return empty character
+    return("")
+  } else{
+    # Take out whitespaces
+    temp <- temp[sapply(temp, function(b) b != "")]
+    # Reconstruct and take out punctuation + newlines etc.
+    checkF <- function(z) grepl("[[:punct:]]", z) | grepl("[\r\n\t]", temp)
+    temp <- temp[!checkF(temp) == TRUE]
+    # Paste & collapse
+    paste0(temp, collapse = " ") 
+  }
 }

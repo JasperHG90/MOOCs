@@ -22,7 +22,7 @@ dir_end <- function(directory) {
 }
 
 '
-FUNCTION 2: Quick access to a sqlite OR mysql table.
+FUNCTION 2: Quick access to a sqlite OR mysql table. Function depends on RSQLite & RmySQL packages.
   Parameters :
     - db.name (string) 
         Directory (including name and extension of db) 
