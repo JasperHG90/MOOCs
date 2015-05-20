@@ -1,4 +1,6 @@
-# Leiden University repository of scripts for pre-processing Coursera MOOC data & helper functions
+# Leiden University Coursera Scripts // open Repo
+
+![LUCSoR](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/Lucsor.png)
 
 -----------
 
