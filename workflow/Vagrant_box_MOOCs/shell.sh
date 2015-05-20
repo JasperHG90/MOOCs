@@ -3,7 +3,9 @@
 ### Provisioning the virtual machine
 
 # Update
-sudo apt-get update
+sudo apt-get update <<-EOF
+yes
+EOF
 
 # Install basic requirements
 echo "Installing basic requirements . . . "
@@ -26,14 +28,24 @@ sudo apt-get install libxslt1-dev <<-EOF
 yes
 EOF
 
+## Set time
+
+echo "Europe/Amsterdam" > sudo /etc/timezone
+sudo dpkg-reconfigure -f noninteractive tzdata
+
 ## Folder creation
 
 echo "Creating Folders..."
 mkdir Documents
-cd Documents && mkdir Python_Scripts && mkdir R_Scripts
-cd -
 mkdir Downloads
 mkdir temp
+# Own
+sudo chown -R vagrant Documents
+sudo chown -R vagrant Downloads
+# Clone
+cd Documents
+git clone https://github.com/JasperHG90/MOOCs.git
+cd -
 
 ## Programming
 
@@ -55,13 +67,13 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so.6 /usr/lib/
 sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
 
-echo "Installing Python dependencies..."
-sudo pip install -r /vagrant/Python_requirements.txt
-
 # Update
 sudo apt-get update <<-EOF
 yes
 EOF
+
+echo "Installing Python dependencies..."
+sudo pip install -r /vagrant/Python_requirements.txt
 
 echo "Installing Ipython Notebook..."
 sudo apt-get install ipython-notebook <<-EOF
@@ -72,16 +84,12 @@ EOF
 
 echo "Installing R-base..."
 # Add cran to list of sources (to get the last version of R)
-sudo echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list
+echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> sudo /etc/apt/sources.list
 # Add public keys
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 # Update
 sudo apt-get update <<-EOF
-yes
-EOF
-# Upgrade
-sudo apt-get upgrade <<-EOF
 yes
 EOF
 # Install R-base
@@ -106,10 +114,15 @@ yes
 EOF
 
 echo "Installing R packages..."
-sudo R CMD BATCH /vagrant/R_requirements.R
+sudo R CMD BATCH /vagrant/InstallRpackages.R
 
 echo "Installing rJava..."
 sudo apt-get install r-cran-rjava <<-EOF
+yes
+EOF
+
+echo "Installing RMySQL . . ."
+sudo apt-get install r-cran-rmysql <<-EOF
 yes
 EOF
 
@@ -141,7 +154,12 @@ EOF
 echo "Setting up crontab..."
 sudo crontab /vagrant/crontab.txt
 
-echo "Updating..."
+echo "Updating & Upgrading..."
 sudo apt-get update <<-EOF
 yes
 EOF
+sudo apt-get upgrade <<-EOF
+yes
+EOF
+
+

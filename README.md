@@ -30,7 +30,7 @@ You can find more information on vagrant boxes in the [/vagrant_box_MOOCs](https
 
 ## Using these scripts
 
-The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. After all, sharing is caring :-).
+The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. These scripts focus mainly on data pre-processing, quering and infrastructure. They do not (yet) cover modeling.
 
 It is entirely possible (and, well, likely) that my approaches are not the 'most effective'. I focus on getting the job done. These scripts are meant as a 'getting started'-guide for those who have not yet set up a data infrastructure to work with the MOOC data.
 
