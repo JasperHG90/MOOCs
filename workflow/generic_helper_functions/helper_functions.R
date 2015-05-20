@@ -22,37 +22,67 @@ dir_end <- function(directory) {
 }
 
 '
-FUNCTION 2: Quick access to a sqlite table.
+FUNCTION 2: Quick access to a sqlite OR mysql table.
   Parameters :
     - db.name (string) 
         Directory (including name and extension of db) 
     - table (string)
-        Name of table to be extracted
+        Name of table to be extracted. Defaults to NULL
     - show.table (logical)
         Show tables in db?
+    - db.type (string)
+        Query from SQLite database or MySQL database?
+    - ...
+        Any other arguments needed to connect to a database. For example, username, password, host 
+        name etc.
 '
 
-dbQA <- function(db.name, table = NULL, show.table = c(FALSE, TRUE)) {
+dbQA <- function(db.name, table = NULL, show.table = c(FALSE, TRUE), db.type = c("sqlite","mysql"), ...) {
   # Check if query is legal
   if(length(table) == 0 && show.table == FALSE){
     print("Please specify a table name to query.")
     return(NULL)
   }
-  # Connect
-  db <- dbConnect(SQLite(), dbname = db.name)
-  # If table is true, return 
-  if(show.table == TRUE){
-    tabs <- dbListTables(db)
-    dbDisconnect(db)
-    return(tabs)
-  } else{
+  # Sqlite or mysql
+  db.type <- match.arg(db.type)
+  # if sqlite . . . 
+  if(db.type == "sqlite") {
+    # Connect
+    db <- dbConnect(SQLite(), dbname = db.name, ...)
+    # If table is true, return 
+    if(show.table == TRUE){
+      tabs <- dbListTables(db)
+      dbDisconnect(db)
+      return(tabs)
+    } else{
       # Select table
-    t <- dbReadTable(db, table)
-    # Disconnect db
-    dbDisconnect(db)
-    # Return
-    return(t)
-  }
+      t <- dbReadTable(db, table)
+      # Disconnect db
+      dbDisconnect(db)
+      # Return
+      return(t)
+    }
+  } 
+  if(db.type == "mysql") {
+    # Connect to mySQL
+    con = dbConnect(MySQL(), dbname = db.name, ...)
+    # If table = TRUE, return:
+    if(show.table == TRUE) {
+      # Get tables
+      tabs <- dbListTables(con)
+      # Disconnect
+      dbDisconnect(con)
+      # Return
+      return(tabs)
+    } else{
+      # Select table
+      t <- dbReadTable(con, table)
+      # Disconnect db
+      dbDisconnect(con)
+      # Return
+      return(t)
+    }
+  }  
 }
 
 '

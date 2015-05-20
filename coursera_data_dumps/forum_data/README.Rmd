@@ -32,11 +32,13 @@ data.dir <- "/users/jasper/desktop/TEMP"
 files <- paste0(dir_end(data.dir), list.files(data.dir))
 ```
 
-You can use the "dbQA" ("database Quick Access") function to get all table names residing in a [SQLite](https://www.sqlite.org/) database, e.g.:
+You can use the "dbQA" ("database Quick Access") function to get all table names residing in a [SQLite](https://www.sqlite.org/) or [MySQL](https://www.mysql.com/) database, e.g.:
 
 ```{r}
-# Get all table names
-tabs <- dbQA(files[1], show.table=TRUE)
+# Get all table names for SQLite db
+tabs <- dbQA(files[1], table = NULL, show.table=TRUE, db.type = "sqlite")
+# Get all table names for MySQL db (NOTE: make sure the MySQL server is up and running)
+tabs <- dbQA("terror001", table = NULL, show.table=TRUE, db.type = "mysql", username = "root", password="OLL2015")
 # Print
 knitr::kable(data.frame(Table_name = tabs))
 ```
@@ -57,11 +59,13 @@ knitr::kable(data.frame(Table_name = tabs))
 |forum_threads               |
 |kvs_course.forum_readrecord |
 
-Similarly, you can use the dbQA quick function to query a table from the SQLite file, e.g.
+Similarly, you can use the dbQA quick function to query a table from the SQLite file or MySQL database, e.g.
 
 ```{r}
-# We want all forum comments
-for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE)
+# We want all forum comments. Quering from a Sqlite database
+for.comm <- dbQA(files[1], table = tabs[4], show.table=FALSE, db.type = "sqlite")
+# Same, but then for a MySQL database
+for.comm <- dbQA("terror001", table = tabs[4], show.table=FALSE, db.type = "mysql", username = "root", password = "")
 # Look at structure
 str(for.comm)
 # Col names
