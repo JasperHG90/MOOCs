@@ -5,8 +5,8 @@
 # Update
 sudo apt-get update
 
-# Install base packages
-echo "Installing base packages..."
+# Install basic requirements
+echo "Installing basic requirements . . . "
 sudo apt-get install zlib1g-dev
 sudo apt-get install git <<-EOF
 yes
@@ -25,6 +25,18 @@ EOF
 sudo apt-get install libxslt1-dev <<-EOF
 yes
 EOF
+
+## Folder creation
+
+echo "Creating Folders..."
+mkdir Documents
+cd Documents && mkdir Python_Scripts && mkdir R_Scripts
+cd -
+mkdir Downloads
+mkdir temp
+
+## Programming
+
 echo 'Installing python and pip...'
 sudo apt-get install python-dev <<-EOF
 yes
@@ -32,10 +44,7 @@ EOF
 sudo apt-get install python-pip <<-EOF
 yes
 EOF
-echo "Installing htop..."
-sudo apt-get install htop <<-EOF
-yes
-EOF
+
 echo "Installing libjpeg-dev..."
 sudo apt-get install libjpeg-dev <<-EOF
 yes
@@ -46,13 +55,6 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so.6 /usr/lib/
 sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
 
-echo "Creating Folders..."
-mkdir Documents
-cd Documents && mkdir Python_Scripts && mkdir R_Scripts
-cd -
-mkdir Downloads
-mkdir temp
-
 echo "Installing Python dependencies..."
 sudo pip install -r /vagrant/Python_requirements.txt
 
@@ -60,6 +62,13 @@ sudo pip install -r /vagrant/Python_requirements.txt
 sudo apt-get update <<-EOF
 yes
 EOF
+
+echo "Installing Ipython Notebook..."
+sudo apt-get install ipython-notebook <<-EOF
+yes
+EOF
+
+# R & R-studio
 
 echo "Installing R-base..."
 # Add cran to list of sources (to get the last version of R)
@@ -104,10 +113,14 @@ sudo apt-get install r-cran-rjava <<-EOF
 yes
 EOF
 
-echo "Installing Ipython Notebook..."
-sudo apt-get install ipython-notebook <<-EOF
+# Extra
+
+echo "Installing htop..."
+sudo apt-get install htop <<-EOF
 yes
 EOF
+
+# Installing MongoDB
 
 #Step 1:  Import the MongoDB public key 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
