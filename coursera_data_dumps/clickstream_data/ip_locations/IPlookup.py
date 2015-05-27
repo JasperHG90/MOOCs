@@ -11,7 +11,7 @@ Written by : Jasper Ginn
 Affiliation : Online Learning Lab, Leiden Centre for Innovation, Leiden University
 Date : 23-03-2015
 Last modified : 24-03-2015
-Please send suggestions/comments to : Jasperginn@cdh.leidenuniv.nl
+Please send suggestions/comments to : j.h.ginn@cdh.leidenuniv.nl
 '''
 
 # --------------------------------------------------------------------------------
