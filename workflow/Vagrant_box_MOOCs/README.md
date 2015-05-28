@@ -16,7 +16,7 @@ More information:
 
 Vagrant boxes create and populate a virtual machine on your computer that is an exact clone of the person who made it. The vagrant configuration is stored in the 'Vagrantfile'. The 'shell.sh' script installs programs / packages etc. that are needed for analyses, such as R, R-studio & Python. The 'Python_requirements.txt' file contains a list of python packages to be installed. The 'R_requirements.txt' file contains a list of R packages to be installed. This file is loaded by the 'InstallRpackages.R' file to install the packages. The 'crontab.txt' file contains recursive commands that occur every 'x' seconds, minutes, hours or days.  
 
-# Setting up the vagrantbox (on UNIX machines)
+# Setting up the vagrantbox
 
 After installing vagrant & [virtualBox](https://www.virtualbox.org/), download or clone the [MOOC vagrant box](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs). Via terminal, navigate to the folder where you downloaded the box and run 'vagrant up' to start up the machine. The vagrant box will now start to configure. 
 
