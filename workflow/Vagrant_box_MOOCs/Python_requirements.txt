@@ -3,6 +3,5 @@
 IPWhois
 pymongo
 BeautifulSoup4
-slate
 pdfminer
 
