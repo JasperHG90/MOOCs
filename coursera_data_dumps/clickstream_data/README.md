@@ -7,10 +7,9 @@
 For several reasons, it makes sense to store the clickstream data in a [mongoDB](https://www.mongodb.org/) instance. Advantages include:
 
 1. Mongo is fast
-2. The Coursera exports are essentially [BSON](http://bsonspec.org/) exports from a MongoDB. Importing them is therefore pretty painless. 
+2. The Coursera clickstream exports are (or strongly resemble) [BSON](http://bsonspec.org/) exports from a MongoDB. Importing them is therefore pretty painless. 
 3. Mongo can be queried from within R and Python.
 4. A lot of the 'pre work' such as getting unique URLs, counts and other simple operations can be done from within mongo. As such, you avoid having to load the data in memory in its entirety or that you have to read the files line-by-line.
-5. For those interested; mongo has a map/reduce function.
 
 For general documentation on mongodb, see: http://docs.mongodb.org/manual/core/crud-introduction/
 
