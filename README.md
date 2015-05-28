@@ -25,7 +25,15 @@ Most of these guides have been written with UNIX users in mind. I don't use Wind
 
 I am likely to change the current setup in future releases, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
 
-## Additional Information
+## Using these scripts
+
+The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. These scripts focus mainly on data pre-processing, quering and data infrastructure. They do not (yet) cover modeling.
+
+It is entirely possible (and, well, likely) that my approaches are not the 'most effective'. I focus on getting the job done. These scripts are meant as a 'getting started'-guide for those who have not yet set up a data infrastructure to work with the MOOC data.
+
+The scripts are organized along the lines of the data dumps provided by Coursera. That is to say that each folder corresponds to a specific dataset, and each script within those folders pertains especially to those data. "General" helper functions are provided in the 'general_and_workflow'-folder. For a more specific overview of the folders, please see the section 'Folder structure' below.
+
+## A note on Vagrant virtual boxes
 
 I mostly work from within [vagrant virtual boxes](http://docs.vagrantup.com/v2/boxes.html). This is convenient for the following reasons:
 
@@ -35,14 +43,6 @@ I mostly work from within [vagrant virtual boxes](http://docs.vagrantup.com/v2/b
 4. They allow for a trial-and-error approaches.
 
 You can find more information on vagrant boxes in the [/vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs) folder. 
-
-## Using these scripts
-
-The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. These scripts focus mainly on data pre-processing, quering and data infrastructure. They do not (yet) cover modeling.
-
-It is entirely possible (and, well, likely) that my approaches are not the 'most effective'. I focus on getting the job done. These scripts are meant as a 'getting started'-guide for those who have not yet set up a data infrastructure to work with the MOOC data.
-
-The scripts are organized along the lines of the data dumps provided by Coursera. That is to say that each folder corresponds to a specific dataset, and each script within those folders pertains especially to those data. "General" helper functions are provided in the 'general_and_workflow'-folder. For a more specific overview of the folders, please see the section 'Folder structure' below.
 
 ## Folder structure
 
