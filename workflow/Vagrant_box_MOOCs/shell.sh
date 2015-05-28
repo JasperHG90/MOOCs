@@ -44,7 +44,7 @@ sudo chown -R vagrant Documents
 sudo chown -R vagrant Downloads
 # Clone
 cd Documents
-git clone https://github.com/JasperHG90/MOOCs.git
+git clone https://github.com/LU-CFI/MOOCs.git
 cd -
 
 ## Programming
