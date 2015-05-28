@@ -161,4 +161,4 @@ ggplot(for.melt, aes(x=Post_Date, y=value, colour=variable)) +
 
 ![forum comments](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/forumcomments.png)
 
-One interesting observation to make here is that, while the number of comments and the number of thread posts follow the same pattern (correlation = 0.8), a high number of threads initiated does not seem to drive the number of comments. It's likely that these are influenced by e.g. end-of-week quizzes and other assignments.
+While the number of comments and the number of thread posts follow the same pattern (correlation = 0.8), a high number of threads initiated does not seem to drive the number of comments. It's likely that these are influenced by e.g. end-of-week quizzes and other assignments.
