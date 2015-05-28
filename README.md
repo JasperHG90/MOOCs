@@ -42,6 +42,13 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 
 ## Folder structure
 
+The scripts in this repository are divided into two main folders:
+
+	(1) "Coursera data dumps"
+		* Contains scripts, helper functions & documentation for specific data dumps
+	(2) "Workflow"
+		* Contains scripts, helper functions & documentation to convert unwieldy data formats to more convenient ones. It further contains 'generic' helper functions that are used across scripts. This folder also contains the virtual machine. 
+
 - [/coursera_data_dumps](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps)
 	- [/R_and_MySql](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps/R_and_MySQL)
 	- [/clickstream_data](https://github.com/JasperHG90/MOOCs/tree/master/coursera_data_dumps/clickstream_data)
