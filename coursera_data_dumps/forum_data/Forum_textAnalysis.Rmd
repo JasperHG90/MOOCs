@@ -172,7 +172,7 @@ knitr::kable(head(res[,-c(7,8)]))
 |think      |VVP |think      |    5|verb      |Verb, non-3rd person singular present |
 |important  |JJ  |important  |    9|adjective |Adjective                             |
 
-However, advanced NLP support is much more developed in [Python](http://www.nltk.org/). 
+However, advanced NLP support is much more developed in [Python](http://www.nltk.org/). I will add a script later that deals with text analysis in Python.
 
 # Further information on text processing
 
