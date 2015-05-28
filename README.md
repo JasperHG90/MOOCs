@@ -13,6 +13,10 @@
 
 **This software is licensed under the General Public License v.3** 
 
+## Contact, Feedback & Collaboration
+
+If you have questions, comments, or if you would like to collaborate, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
+
 ## Introduction
 
 This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" for pre-processing MOOC data. Most of the scripts have been written in the [R statistical Language](http://www.r-project.org/). Some of them are written in [Python](https://www.python.org/). This repository of scripts will be updated regularly.
@@ -56,7 +60,3 @@ The scripts in this repository are divided into two main folders:
 - [/workflow](https://github.com/JasperHG90/MOOCs/tree/master/workflow)
 	- [/Vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs)
 	- [/generic_helper_functions](https://github.com/JasperHG90/MOOCs/tree/master/workflow/generic_helper_functions)
-
-## Contact, Feedback & Collaboration
-
-If you have questions, comments, or if you would like to collaborate, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
