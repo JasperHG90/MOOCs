@@ -157,8 +157,6 @@ sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql mysql-ser
 yes
 EOF
 
-sudo apt-get install mysql-client
-
 echo "Setting up crontab..."
 sudo crontab /vagrant/crontab.txt
 
