@@ -1,4 +1,4 @@
-# Leiden University Coursera Scripts // open Repo
+# Leiden University MOOC Scripts // open Repo
 
 ![LUCSoR](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/Lucsor.png)
 
@@ -10,6 +10,8 @@
 - Email: j.h.ginn[at]cdh.leidenuniv.nl
 - Institution: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 23-04-2015
+
+This software is licensed under the General Public License v.3 
 
 ## Introduction
 
