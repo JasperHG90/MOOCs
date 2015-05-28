@@ -151,6 +151,14 @@ sudo apt-get install mongodb-org <<-EOF
 yes
 EOF
 
+# Installing MySQL
+echo 'Installing MySQL . . . '
+sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql mysql-server-5.5 mysql-client -q <<-EOF
+yes
+EOF
+
+sudo apt-get install mysql-client
+
 echo "Setting up crontab..."
 sudo crontab /vagrant/crontab.txt
 
