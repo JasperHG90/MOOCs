@@ -8,12 +8,6 @@ More Information:
  2. [Installing MySQL & MySQL workbench](https://dev.mysql.com/downloads/mysql/)
  3. [MySQL v. SQLite](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems)
 
-### A note on my use of SQLite databases
-
-I convert all of the Coursera MySQL dumps to SQLite databases and use these interchangeably. SQLite databases work in a similar way to MySQL databases. However, they are serverless and take a hit on security (among other differences). As I previously mentioned, I work in a Vagrant box. This means that oftentimes, I need to re-populate my VM with data if something goes wrong. I find it's simples to copy SQLite files into the box as part of the standard VM population. 
-
-However, I have added a quick how-to on working with R & MySQL in the "/R_and_RMySQL" folder. I also altered the [SQL quick access helper function](https://github.com/JasperHG90/MOOCs/blob/master/workflow/generic_helper_functions/helper_functions.R) to be able to query from both SQLite & MySQL databases. 
-
 # Working with the MySQL coursera data dumps
 
 After installing MySQL on your environment, you should start by changing the password.
@@ -61,13 +55,17 @@ Now, import a sql dumpfile into the mysql database with the following command. Y
 
 	6. mysql -u <USERNAME> -p -D my_session < /path/to/FILENAME.sql
 
-## Exporting a MySQL database to SQLite database
+## A note on my use of SQLite databases
+
+I generally convert all of the Coursera MySQL dumps to SQLite databases and use these interchangeably. SQLite databases work in a similar way to MySQL databases. However, they are serverless and take a hit on security (among other differences). Also, I find it's straightforward to copy SQLite files into the vagrant box as part of the standard VM population. 
+
+However, I have added a quick how-to on working with R & MySQL in the "/R_and_RMySQL" folder. I also altered the [SQL quick access helper function](https://github.com/JasperHG90/MOOCs/blob/master/workflow/generic_helper_functions/helper_functions.R) to be able to query from both SQLite & MySQL databases. 
 
 It is possible to convert MySQL databases to SQLite (see: https://gist.github.com/esperlu/943776)
 
 To convert, download the script. Then, navigate to the folder where the script is located and run the following line:
 
-	- sh mysql2sqlite.sh --no-data -u root -p <MySQLtablename> | sqlite3 /path/to/folder/<dbname>.sqlite
+	- sh mysql2sqlite.sh -u root -p <MySQLtablename> | sqlite3 /path/to/folder/<dbname>.sqlite
 
 You will be prompted to enter the mySQL password, after which the MySQL database will be converted to the location you specified.
 
