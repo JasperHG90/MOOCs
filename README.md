@@ -23,7 +23,7 @@ This repository contains semi-cleaned scripts and documentation which you can us
 
 Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a [Vagrant box](http://docs.vagrantup.com/v2/boxes.html) in the ["/workflow"](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs) folder which will install a clone of my working environment. When using the vagrant box, all of these guides should work seamlessly, and I encourage you to use it.
 
-It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
+I am likely to change the current setup in future releases, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
 
 ## Additional Information
 
