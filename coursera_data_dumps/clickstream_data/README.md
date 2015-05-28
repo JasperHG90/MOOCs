@@ -21,16 +21,6 @@ Installing mongo can be a bit tricky depending on your OS. I do this on [my Linu
 - [For Mac](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
 - [For Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/)
 
-## Importing Coursera clickstream data ([JSON](http://json.org/) format) in mongo
-
-Using terminal:
-
-	- mongoimport -d [name database] -c [name collection] --type json --file [/path/to/filename].[extension]
-
-e.g.:
-
-	- mongoimport -d moocs -c metals001 --type json --file /users/jasper/desktop/metalsclickstream.txt
-
 ## Basic mongodb commands
 
 Using terminal:
@@ -59,6 +49,16 @@ Using terminal:
 			- mongo 127.0.0.1/mydb --eval "var c = db.terror.find({'key' : 'user.video.lecture.action', 'page_url' : 'https://class.coursera.org/terrorism-004/lecture/view?lecture_id=211'}); while(c.hasNext()) {printjson(c.next())}" >> test.txt
 
 			- mongo 127.0.0.1/mydb --eval "printjson(db.terror.count())"
+
+## Importing Coursera clickstream data ([JSON](http://json.org/) format) in mongo
+
+Using terminal:
+
+	- mongoimport -d [name database] -c [name collection] --type json --file [/path/to/filename].[extension]
+
+e.g.:
+
+	- mongoimport -d moocs -c metals001 --type json --file /users/jasper/desktop/metalsclickstream.txt
 
 ## Using [rmongodb](http://cran.r-project.org/web/packages/rmongodb/index.html) to query data in R
 
