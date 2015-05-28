@@ -1,6 +1,6 @@
 # Leiden University MOOC Scripts // open Repo
 
-![LUCSoR](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/Lucsor.png)
+![LUMSoR](https://dl.dropboxusercontent.com/u/38011066/CFI/plots/Lucsor.png)
 
 -----------
 
@@ -11,15 +11,15 @@
 - Institution: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 23-04-2015
 
-This software is licensed under the General Public License v.3 
+**This software is licensed under the General Public License v.3** 
 
 ## Introduction
 
-This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" which could be useful for working with these data. Most of the scripts have been written in the [R statistical Language](http://www.r-project.org/). Some of them are written in [Python](https://www.python.org/). This repository of scripts will be updated sporadically to add new functions or update existing ones. 
+This repository contains semi-cleaned scripts and documentation which you can use to pre-process Coursera MOOC data dumps. It further contains several "helper functions" for pre-processing MOOC data. Most of the scripts have been written in the [R statistical Language](http://www.r-project.org/). Some of them are written in [Python](https://www.python.org/). This repository of scripts will be updated regularly.
 
-Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a [Vagrant box](http://docs.vagrantup.com/v2/boxes.html) in the "/workflow" folder that you could use. When using the vagrant box, all of these guides should work seamlessly.
+Most of these guides have been written with UNIX users in mind. I don't use Windows, and those of you who do might need to puzzle a bit to get things working. However, I also provide a [Vagrant box](http://docs.vagrantup.com/v2/boxes.html) in the ["/workflow"](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs) folder which will install a clone of my working environment. When using the vagrant box, all of these guides should work seamlessly, and I encourage you to use it.
 
-Most of these scripts will be frequently updated. It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
+It is entirely possible (and likely) that I change my workflow in the future, thus altering the setup of these scripts somewhat. However, it is my goal to keep these scripts interpretable & informative.
 
 ## Additional Information
 
@@ -34,7 +34,7 @@ You can find more information on vagrant boxes in the [/vagrant_box_MOOCs](https
 
 ## Using these scripts
 
-The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. These scripts focus mainly on data pre-processing, quering and infrastructure. They do not (yet) cover modeling.
+The scripts in this repository are 'semi-cleaned'. i.e. I've written them primarily for my own convenience, but they should be adaptable to your own data. Any feedback is hugely appreciated. These scripts focus mainly on data pre-processing, quering and data infrastructure. They do not (yet) cover modeling.
 
 It is entirely possible (and, well, likely) that my approaches are not the 'most effective'. I focus on getting the job done. These scripts are meant as a 'getting started'-guide for those who have not yet set up a data infrastructure to work with the MOOC data.
 
@@ -50,6 +50,6 @@ The scripts are organized along the lines of the data dumps provided by Coursera
 	- [/Vagrant_box_MOOCs](https://github.com/JasperHG90/MOOCs/tree/master/workflow/Vagrant_box_MOOCs)
 	- [/generic_helper_functions](https://github.com/JasperHG90/MOOCs/tree/master/workflow/generic_helper_functions)
 
-## Contact & Feedback
+## Contact, Feedback & Collaboration
 
-If you have questions, comments, or other requests, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
+If you have questions, comments, or if you would like to collaborate, please contact me at: j.h.ginn[at]cdh.leidenuniv.nl
