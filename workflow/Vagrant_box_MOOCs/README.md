@@ -53,8 +53,6 @@ In your browser, navigate to: http://127.0.0.1:8888
 
 Rstudio server will start as a service. If you need to start it up manually, do 'sudo rstudio-server start' (or '... stop' to stop it / '... start' to start) while in the vagrant box. Then, navigate to: http://127.0.0.1:8787 in your browser. The username/password is your UNIX username/password (e.g. 'vagrant / vagrant')
 
-### Working with Mongo
-
 
 
 
