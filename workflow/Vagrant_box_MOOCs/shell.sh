@@ -153,7 +153,9 @@ EOF
 
 # Installing MySQL
 echo 'Installing MySQL . . . '
-sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql mysql-server-5.5 -q -y
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql -q -y
 
 echo "Setting up crontab..."
 sudo crontab /vagrant/crontab.txt
