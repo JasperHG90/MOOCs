@@ -10,6 +10,7 @@
 - Email: j.h.ginn[at]cdh.leidenuniv.nl
 - Institution: Online Learning Lab, Leiden Centre for Innovation, Leiden University
 - Date: 23-04-2015
+- Review date: 15-07-2015
 
 **This software is licensed under the General Public License v.3** 
 
